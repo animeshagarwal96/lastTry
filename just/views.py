@@ -27,16 +27,18 @@ def searchTheProductforShow(query,product):
     return products
 
 def index(request):
-    # product = Product.objects.filter(instock = 5)
-    # category = Product.objects.values('category')
-    # cats = {item['category'] for item in category}
-    # allprods = []
-    # for cat in cats:
-    #     prod = Product.objects.filter(category=cat)
-    #     allprods.append(prod)
-    # params = {"allprods":allprods}
-    # return render(request,'shop/index.html',params)
-    return render(request,'shop/index.html')
+    product = Product.objects.filter(instock = 5)
+    if not product:
+        return render(request,'shop/index.html')
+    category = Product.objects.values('category')
+    cats = {item['category'] for item in category}
+    allprods = []
+    for cat in cats:
+        prod = Product.objects.filter(category=cat)
+        allprods.append(prod)
+    params = {"allprods":allprods}
+    return render(request,'shop/index.html',params)
+    # return render(request,'shop/index.html')
 
 def contact(request):
     if request.method == 'POST':
