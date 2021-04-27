@@ -1,0 +1,88 @@
+{% extends 'shop/base.html' %}
+{% block title %}home{% endblock %}
+{% block css %}
+  .col-md-3
+  {
+  display: inline-block;
+  margin-left:-4px;
+  }
+  .carousel-indicators .active {
+  background-color: blue;
+    }
+  .col-md-3 img{
+  width:100%;
+  height:auto;
+  }
+  body .carousel-indicator li{
+  background-color: blue;
+  }
+  body .carousel-indicators{
+  bottom: 0;
+  }
+  body .carousel-control-prev-icon,
+  body .carousel-control-next-icon{
+  background-color: blue;
+  }
+  .carousel-control-next, .carousel-control-prev{
+    bottom:-300px;
+  }
+  body .no-padding{
+   padding-left: 0;
+   padding-right: 0;
+   }
+   .bg-yellow {
+    background-color: #ffc107eb!important;
+   }
+   .logo{
+     width:220px;
+     height:150px;
+     border-radius: 32px;
+   }
+   .card{
+     border:2px solid #9ba71d;
+   }
+   .row{
+     background-color: #d44040;
+   }
+   @media screen and (max-width: 700px){
+    .logo{
+      width:300px;
+     height:200px;
+     border-radius: 32px;
+    }
+   }
+{% endblock %}
+{% block home %}active{% endblock %}
+{% block body %}
+   <div class="p-4 p-md-5 mb-4 text-white rounded bg-yellow">
+    <div class="col-md-6 px-0">
+      <img class="logo" src="media\shop\images\logo2.jpeg">
+      <!-- <h1 class="display-4 fst-italic">Click<strong style="color:#cd4fc9;">N</strong>Pick</h1> -->
+      <p class="lead my-3">Its a multinational ecommerse company</p>
+    </div>
+  </div>
+  
+  <div class="container">
+    {% for product in allprods %}
+    <h1 class="my-2" style="border-radius:15px;text-align:center;">{{product.0.category}}</h1>
+    <div class="row">
+      {% for i in product %}
+      <div class="col-xs-3 col-sm-3 col-md-3">
+        <div class="card" style="width: 17rem;">
+          <img src="media/{{i.image}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{i.product_name}}</h5>
+            <p class="card-text">{{i.desc}}</p>
+            <a href="/checkout/{{i.product_id}}" class="btn btn-primary">Buy Now</a>
+            <a href="/product/{{i.product_id}}" class="btn btn-primary">Quick view</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  
+  
+  
+{% endblock %}

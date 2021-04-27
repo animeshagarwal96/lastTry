@@ -1,0 +1,141 @@
+{% extends 'shop/base.html '%}
+{% block title %}{{product.0.product_name}}{% endblock %} 
+{% block css %}
+    .background{
+        display:flex;
+        flex-direction:column;
+        margin:10px 0px;
+        justify-content:center;
+        align-items: center;
+    }
+{% endblock %}
+{% block body %}
+<!-- <div class="container">
+    <h1>Step 1: Check Your Order</h1>
+</div> -->
+    
+    <div class="container">
+        <h1>Step 1: Verify Payment Option</h1>
+    </div>
+    <div class="container">
+        <div class="alert alert-primary" role="alert">
+            Cash on Delivery
+          </div>
+          <div class="alert alert-primary" role="alert">
+           Rs.0 Delivery Charges
+          </div>
+    </div>
+    <div class="container">
+        <h1>Step 3: Fill Your Order Details</h1>
+    </div>
+    <div class="container alert alert-primary">
+        <form class="row g-3" action="/checkout/{{product.0.product_id}}" method="post">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img class="card-img-top" src="\media\{{product.0.image}}" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{product.0.product_name}}</h5>
+                      <p class="card-text">{{product.0.desc}}</p>
+                      {% if product.0.category == 'Pants'%}
+                      <span>Select Size </span>
+                      <select name="size2" id="size2" class="form-select">
+                        <!-- <option selected>Open this select menu</option> -->
+                        <option >28</option>
+                        <option selected>30</option>
+                        <option >32</option>
+                        <option >34</option>
+                        <option >36</option>
+                      </select>
+                      {% elif product.0.category == 'Garments' %}
+                      <span>Select Size </span>
+                      <select name="size" id="size" class="form-select">
+                        <!-- <option selected>Open this select menu</option> -->
+                        <option >Small</option>
+                        <option selected>Medium</option>
+                        <option >Large</option>
+                        <option >Extra-large</option>
+                        <option >Extra-Extra-Large</option>
+                      </select>
+                      {% endif %}
+                      <p class="card-text"><small class="text-muted">Rs. {{product.0.product_price}}</small></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <input type="hidden" name="id" id="id" value="{{product.0.product_id}}">
+            <input type="hidden" name="productname" id="productname" value="{{product.0.product_name}}">
+            <input type="hidden" name="price" id="price" value="{{product.0.product_price}}">
+            <input type="hidden" name="category" id="category" value="{{product.0.category}}">
+            {% csrf_token %}
+            <div class="col-md-12">
+                <label for="name" class="form-label">Your Full Name</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+              </div>
+            <div class="col-md-12">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" name="email" class="form-control" id="email" placeholder="Your Email" required>
+            </div>
+            <div class="col-md-6">
+              <label for="phone" class="form-label">Phone</label>
+              <input type="tel" name="phone" class="form-control" id="phone" placeholder="Your Phone Number" required>
+            </div>
+            <div class="col-md-6">
+                <label for="phone2" class="form-label">Phone-2</label>
+                <input type="tel" name="phone2" class="form-control" id="phone2" placeholder="Your Alternate Number" required>
+              </div>
+            <div class="col-12">
+              <label for="address1" class="form-label">Address</label>
+              <input type="text" name="address1" class="form-control" id="address1" placeholder="Your Street Address" required>
+            </div>
+            <div class="col-12">
+              <label for="address2" class="form-label">Address 2(Not Required)</label>
+              <input type="text" name="address2" class="form-control" id="address2" placeholder="Your Alternate Address">
+            </div>
+            <div class="col-md-4">
+              <label for="city" class="form-label">City</label>
+              <select name="city" id="city" class="form-select" required>
+                <!-- <option selected>Choose...</option> -->
+                <option>Kolkata</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="state" class="form-label">State</label>
+              <select name="state" id="state" class="form-select" required>
+                <!-- <option selected>Choose...</option> -->
+                <option>West Bengal</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label for="zip" class="form-label">Zip</label>
+              <input type="text" name="zip" class="form-control" id="zip" required>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="col-12">
+                <button type="submit" class="btn btn-secondary btn-md">Place Order</button>
+            </div>
+            {% else %}
+            <div class="alert alert-danger col-12" role="alert">
+                You need to login first in order to place order !!
+              </div>
+            {% endif %}
+          </form>
+    </div>
+    
+    {% block js %}
+        <script>
+            function value2(){
+               const size =  document.getElementById('size2').value
+               console.log(size)
+               document.getElementById('productsize').value = size;
+            }
+            function value(){
+                const size2 =  document.getElementById('size').value
+               console.log(size2)
+               document.getElementById('productsize').value = size2;
+            }
+        </script>
+    {% endblock %}
+{% endblock %}
