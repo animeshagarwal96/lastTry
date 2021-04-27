@@ -1,7 +1,3 @@
-{% extends 'shop/base.html' %}
-{% block title %}home{% endblock %}
-{% block css %}
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&display=swap');
 * {
@@ -9,14 +5,20 @@
     margin: 0;
     font-family: 'Poppins', sans-serif;
 }
-body{
-  background: #dddfd4;
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #09161d;
 }
+
 .card {
     position: relative;
     width: 320px;
     height: 420px;
-    background: orange;
+    background: #122936;
     border-radius: 20px;
     overflow: hidden;
 }
@@ -27,7 +29,7 @@ body{
     top: -50%;
     width: 100%;
     height: 100%;
-    background: #fff;
+    background: #2196f3;
     transform: skewY(345deg);
     transition: 0.5s;
 }
@@ -38,7 +40,7 @@ body{
 }
 
 .card::after {
-    content: "JC&P";
+    content: "Urban";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -110,64 +112,3 @@ body{
     top: 0;
     opacity: 1;
 }
-  <!--- 
-    *******************
-  -->
-
-  body .no-padding{
-   padding-left: 0;
-   padding-right: 0;
-   }
-   .bg-yellow {
-    background-color: #ffc107eb!important;
-   }
-   .logo{
-     width:220px;
-     height:150px;
-     border-radius: 32px;
-   }
-   .card{
-     margin-bottom:10px;
-   }
-   @media screen and (max-width: 700px){
-    .logo{
-      width:300px;
-     height:200px;
-     border-radius: 32px;
-    }
-   }
-{% endblock %}
-{% block home %}active{% endblock %}
-{% block body %}
-   <div class="p-4 p-md-5 mb-4 text-white rounded bg-yellow">
-    <div class="col-md-6 px-0">
-      <img class="logo" src="media\shop\images\logo2.jpeg">
-      <!-- <h1 class="display-4 fst-italic">Click<strong style="color:#cd4fc9;">N</strong>Pick</h1> -->
-      <p class="lead my-3">Its a multinational ecommerse company</p>
-    </div>
-  </div>
-  
-  <div class="container">
-    {% for product in allprods %}
-    <h1 class="my-2" style="border-radius:15px;text-align:center;">{{product.0.category}}</h1>
-    <div class="row">
-      {% for i in product %}
-      <div class="col-xs-2 col-sm-2 col-md-2" style="margin-right:168px;">
-        <h2>{{i.product_name}}</h2>
-        <div class="card" >
-          <div class="imgBx">
-            <img src="\media\{{i.image}}" alt="">
-          </div>
-          <div class="contextBx">
-            <h2 class="price">Rs {{i.product_price}}</h2>
-              <a href="\checkout\{{i.product_id}}" class="buy">Buy now</a>
-              <a href="\product\{{i.product_id}}" class="buy">Quick View</a>
-          </div>
-      </div>
-      </div>
-      {% endfor %}
-    </div>
-    {% endfor %}
-  </div>
-  
-{% endblock %}
