@@ -13,6 +13,8 @@ class Product(models.Model):
     manufacturer_detail = models.CharField(max_length=100,blank=True)
     seller_name = models.CharField(max_length=100,blank=True)
     desc = models.CharField(max_length =1000,blank=False)
+    warranty_period = models.CharField(max_length=1000,blank=False,default="")
+    refundable = models.CharField(max_length=1000,blank=False,default="")
     date = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to="shop/images")
     image1 = models.ImageField(upload_to="shop/images",blank=True)
@@ -20,6 +22,7 @@ class Product(models.Model):
     image3 = models.ImageField(upload_to="shop/images",blank=True)
     image4 = models.ImageField(upload_to="shop/images",blank=True)
     instock = models.CharField(max_length=100,blank=True)
+
 
     def __str__(self):
         return self.product_name
