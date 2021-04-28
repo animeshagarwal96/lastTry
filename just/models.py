@@ -2,15 +2,23 @@ from django.db import models
 
 # Create your models here.
 
+
+
 class Product(models.Model):
     product_id = models.AutoField(primary_key=True)
     product_name = models.CharField(max_length=100,blank=False)
     product_price = models.CharField(max_length=100,blank=False)
     category = models.CharField(max_length=100,blank=False)
     subcategory = models.CharField(max_length = 100,blank=False)
+    manufacturer_detail = models.CharField(max_length=100,blank=True)
+    seller_name = models.CharField(max_length=100,blank=True)
     desc = models.CharField(max_length =1000,blank=False)
     date = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to="shop/images")
+    image1 = models.ImageField(upload_to="shop/images",blank=True)
+    image2 = models.ImageField(upload_to="shop/images",blank=True)
+    image3 = models.ImageField(upload_to="shop/images",blank=True)
+    image4 = models.ImageField(upload_to="shop/images",blank=True)
     instock = models.CharField(max_length=100,blank=True)
 
     def __str__(self):
