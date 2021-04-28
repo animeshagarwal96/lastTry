@@ -173,26 +173,36 @@ html, body {
 @media (max-width: 940px) {
   .container {
     flex-direction: column;
-    margin-top: 60px;
+    margin-top:60px;
   }
  
   .left-column,
   .right-column {
     width: 100%;
   }
+
+  .right-column{
+    margin-top:120px;
+  }
  
   .left-column img {
-    width: 300px;
-    right: 0;
-    top: -65px;
+    width: 358px;
+    right: 5px;
+    top: -61px;
     left: initial;
   }
 }
  
 @media (max-width: 535px) {
   .left-column img {
-    width: 220px;
-    top: -85px;
+    width: 330px;
+    top: -13px;
+  }
+  .container {
+    margin-top:3px;
+  }
+  .right-column{
+    margin-top:339px;
   }
 }
 
@@ -221,8 +231,6 @@ html, body {
 <div class="container">
  
   <div class="left-column" style="margin-right:5px;">
-    <img data-image="black" src="\media\{{product.0.image}}" alt="">
-    <img data-image="blue" src="\media\{{product.0.image}}" alt="">
     <img data-image="red" class="active" src="\media\{{product.0.image}}" alt="">
   </div>
  
