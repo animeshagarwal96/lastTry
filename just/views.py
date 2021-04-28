@@ -138,12 +138,12 @@ def handleSignup(request):
             myuser.save()
             user = Users(fname=fname,lname=lname,email=email,password=password1)
             user.save()
-            # redirect('home')
-            # subject = 'welcome to JCNP world'
-            # message = f'Hi {myuser.first_name}, thank you for registering in JustClickNPick your register id is {myuser.email} and Password is {password1}'
-            # email_from = settings.EMAIL_HOST_USER
-            # recipient_list = [myuser.email, ]
-            # send_mail( subject, message, email_from, recipient_list )
+            redirect('home')
+            subject = 'welcome to JCNP world'
+            message = f'Hi {myuser.first_name}, thank you for registering in JustClickNPick your register id is {myuser.email} and Password is {password1}'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [myuser.email, ]
+            send_mail( subject, message, email_from, recipient_list )
             messages.success(request,'Your Acount has been Registered')
             return redirect('home')
         except Exception as e:

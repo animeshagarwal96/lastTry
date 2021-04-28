@@ -9,6 +9,9 @@
   text-align: center;
   font-family: arial;
   box-sizing:border;
+  border:4px solid lightblue;
+  background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+  border-radius:8px;
 }
 
 .price {
@@ -21,7 +24,7 @@
   outline: 0;
   padding: 12px;
   color: white;
-  background-color: #000;
+  <!-- background-color: #000; -->
   text-align: center;
   cursor: pointer;
   width: 100%;
@@ -40,7 +43,7 @@
    padding-right: 0;
    }
    .bg-yellow {
-    background-color: #ffc107eb!important;
+    background-image: linear-gradient(-225deg, #FFE29F 0%, #FFA99F 48%, #FF719A 100%);
    }
    .logo{
      width:220px;
@@ -57,12 +60,20 @@
      border-radius: 32px;
     }
    }
+   .btn-outline-success:hover{
+    background-image: linear-gradient(60deg, #abecd6 0%, #fbed96 100%);
+   }
+   .btn-outline-success{
+     background:black;
+     <!-- border:8px solid red; -->
+     border-radius:10px;
+   }
 {% endblock %}
 {% block home %}active{% endblock %}
 {% block body %}
    <div class="p-4 p-md-5 mb-4 text-white rounded bg-yellow">
     <div class="col-md-6 px-0">
-      <img class="logo" src="media\shop\images\logo2.jpeg">
+      <img class="logo" src="media\shop\images\logo_3.png">
       <!-- <h1 class="display-4 fst-italic">Click<strong style="color:#cd4fc9;">N</strong>Pick</h1> -->
       <!-- <p class="lead my-3">Its a multinational ecommerse company</p> -->
     </div>
@@ -79,8 +90,8 @@
           <h1>{{i.product_name}}</h1>
           <p class="price">Rs{{i.product_price}}</p>
           <p>{{i.short_desc}}</p>
-          <p><a class="btn btn-dark" href="\product\{{i.product_id}}">Quick View</a></p>
-          <p><a class="btn btn-dark" href="\checkout\{{i.product_id}}">Buy Now</a></p>
+          <p><a class="btn btn-outline-success" href="\product\{{i.product_id}}">Quick View</a></p>
+          <p><a class="btn btn-outline-success" href="\checkout\{{i.product_id}}">Buy Now</a></p>
         </div>
       </div>
       {% endfor %}
