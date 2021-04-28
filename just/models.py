@@ -13,6 +13,7 @@ class Product(models.Model):
     manufacturer_detail = models.CharField(max_length=100,blank=True)
     seller_name = models.CharField(max_length=100,blank=True)
     desc = models.CharField(max_length =1000,blank=False)
+    short_desc = models.CharField(max_length =500,blank=True,default="")
     warranty_period = models.CharField(max_length=1000,blank=False,default="")
     refundable = models.CharField(max_length=1000,blank=False,default="")
     date = models.DateTimeField(auto_now_add=True)
