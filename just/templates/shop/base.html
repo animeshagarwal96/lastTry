@@ -72,7 +72,13 @@
 .btn-primary{
   background-image: linear-gradient(-20deg, #616161 0%, #9bc5c3 100%);
 }
-
+.nav-link{
+  font-size: 12px;
+  color: #0e538c;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
 .img-zoom-result {
   border: 1px solid #d4d4d4;
   /*set the size of the result div:*/
@@ -102,16 +108,16 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="nav nav-pills mr-auto">
       <li class="nav-item mx-2">
-        <a class="nav-link {% block home %} {% endblock %}" aria-current="page" href="/">Home</a>
+        <a class="nav-link {% block home %} {% endblock %}" aria-current="page" href="/">HOME</a>
       </li>
       <li class="nav-item mx-2">
-        <a class="nav-link {% block about %} {% endblock %}" href="/about">About us</a>
+        <a class="nav-link {% block about %} {% endblock %}" href="/about">ABOUT US</a>
       </li>
       <li class="nav-item mx-2">
-        <a class="nav-link {% block contact  %} {% endblock %}" href="/contact">Contact Us</a>
+        <a class="nav-link {% block contact  %} {% endblock %}" href="/contact">CONTACT US</a>
       </li>
       <li class="nav-item mx-2">
-        <a class="nav-link {% block orders  %} {% endblock %}" href="/orders">Orders</a>
+        <a class="nav-link {% block orders  %} {% endblock %}" href="/orders">ORDERS</a>
       </li>
     </ul>
     <div class="ml-auto"></div>
