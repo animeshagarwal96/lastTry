@@ -12,7 +12,7 @@ from django.core.mail import send_mail
 def searchTheProduct(query,product):
     products = []
     for i in product:
-        if query in i.product_name or query in i.category  or query in i.subcategory:
+        if query in i.product_name.lower() or query in i.category.lower()  or query in i.subcategory.lower():
             products.append(i)
     return products
 
@@ -20,7 +20,7 @@ def searchTheProductforShow(query,product):
     products = []
     j = 0
     for i in product:
-        if query in i.product_name or query in i.category  or query in i.subcategory:
+        if query in i.product_name.lower() or query in i.category.lower()  or query in i.subcategory.lower():
             products.append(i)
             if len(products)==3:
                 break
@@ -30,11 +30,11 @@ def index(request):
     product = Product.objects.filter(instock = 5)
     if not product:
         return render(request,'shop/index.html')
-    category = Product.objects.values('category')
-    cats = {item['category'] for item in category}
+    subcategory = Product.objects.values('subcategory')
+    cats = {item['subcategory'] for item in subcategory}
     allprods = []
     for cat in cats:
-        prod = Product.objects.filter(category=cat)
+        prod = Product.objects.filter(subcategory=cat)
         allprods.append(prod)
     params = {"allprods":allprods}
     return render(request,'shop/index.html',params)
@@ -59,7 +59,7 @@ def search(request):
     if request.method == "GET":
         query = request.GET.get('search')
         product = Product.objects.all()
-        products = searchTheProduct(query,product)
+        products = searchTheProduct(query.lower(),product)
     length = len(products)
     
     return render(request,'shop/search.html',{'products':products,'length':length})
@@ -108,7 +108,7 @@ def product(request,id):
     query = product[0].category
     query = query.lower()
     allprods = Product.objects.all()
-    products = searchTheProductforShow(query,allprods)
+    products = searchTheProductforShow(query.lower(),allprods)
     
     return render(request,'shop/product.html',{'product':product,'products':products})
 
