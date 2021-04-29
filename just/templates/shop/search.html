@@ -1,7 +1,12 @@
 {% extends 'shop/base.html' %}
 {% block title %}Search{% endblock %}
+{% block css %} 
+.card{
+  background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+}
+{% endblock %}
 {% block body %}
-    <div class="album py-5 bg-light">
+    <div class="album py-5">
       <div class="container">
       <h1 class="my-4" style="text-align: center;">Search result-<span class="badge bg-secondary">{{length}}</span></h1>
       <div class="row">
