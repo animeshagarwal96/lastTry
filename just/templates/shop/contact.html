@@ -13,6 +13,17 @@
     h1{
         color:#747568;
     }
+    .link-secondary{
+        color:#444f5a;
+    }
+    @media (max-width:899px){
+        .submit2{
+            margin:10px;
+        }
+    }
+    .mylog{
+        width:50px;
+    }
 {% endblock %}
 {% block contact %}active{% endblock %}
 {% block body %}
@@ -40,7 +51,46 @@
               <textarea name="query" class="form-control" id="query" rows="3"></textarea>
             </div>
             {% csrf_token %}
-            <input type="submit" class="btn btn-primary">
+            <input type="submit" class="btn btn-primary submit2">
           </form>
     </div>
+
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+          <div class="col-12 col-md" style="margin-left: 10px;">
+            <img class="mb-2 mylog" src="\media\shop\images\logo_2.png" alt="">
+            <small class="d-block mb-3 text-muted">© 2021–2022</small>
+            <small class="d-block mb-3 text-muted">Mail us on: <a class="link-secondary text-decoration-none" href="#">justclicknpick1@gmail.com</a></small>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Features</h5>
+            <ul class="list-unstyled text-small">
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>Resources</h5>
+            <ul class="list-unstyled text-small">
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-md">
+            <h5>About</h5>
+            <ul class="list-unstyled text-small">
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team@justclicknpick.in</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Office: Kolkata</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
+              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
 {% endblock %}
