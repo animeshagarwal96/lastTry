@@ -86,14 +86,24 @@ def checkout(request,id):
         state = request.POST.get('state')
         zipCode = request.POST.get('zip')
         customer_username = request.user.username
+        customer_firstName = request.user.first_name
         #check the conditions
         if city.lower() != 'kolkata' or state.lower() != 'west bengal':
             messages.error(request,'We dont deliver this product to your place')
             return redirect(request.path)
         order = Order(product_id=product_id,product_name=product_name,product_price=product_price,product_category=product_category,category_size=category_size,customer_name=customer_name,customer_email=customer_email,customer_phone=customer_phone,alternative_number=alternative_number,delivery_address=delivery_address,Alternate_address=Alternate_address,city=city,state=state,zipCode=zipCode,customer_username = customer_username)
         order.save()
+        
+        #Mail thing
+        subject = 'Thank you for Ordering in JC&P'
+        message = f'Hi {customer_firstName}, thank you for Ordering {product_name} of Amount Rs {product_price} from JustClickNPick your Order will be delivered at {delivery_address} within 7 working days for in case if the Order gets late contact us on www.justclicknpick.in/contact or mail us on {settings.EMAIL_HOST_USER} Payment method is Cash On Delivery'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [customer_email, ]
+        send_mail( subject, message, email_from, recipient_list )
         messages.success(request,'Your order has been placed successfully')
+
         return redirect('home')
+
     product = Product.objects.filter(product_id = id)
     if not request.user.is_authenticated:
         messages.error(request,'You are not logged in please logged in first in order to Place any orders')
@@ -139,7 +149,7 @@ def handleSignup(request):
             user = Users(fname=fname,lname=lname,email=email,password=password1)
             user.save()
             redirect('home')
-            subject = 'welcome to JCNP world'
+            subject = 'welcome to JC&P world'
             message = f'Hi {myuser.first_name}, thank you for registering in JustClickNPick your register id is {myuser.email} and Password is {password1}'
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [myuser.email, ]

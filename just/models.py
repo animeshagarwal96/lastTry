@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 
 # Create your models here.
 
@@ -16,6 +17,7 @@ class Product(models.Model):
     short_desc = models.CharField(max_length =500,blank=True,default="")
     warranty_period = models.CharField(max_length=1000,blank=False,default="")
     refundable = models.CharField(max_length=1000,blank=False,default="")
+    keyfeature = models.CharField(max_length=1000,blank=False,default="")
     date = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to="shop/images")
     image1 = models.ImageField(upload_to="shop/images",blank=True)

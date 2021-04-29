@@ -208,6 +208,13 @@ img {
 		margin-bottom: 24px;
 	}
 }
+.font{
+    font-size: 12px;
+    color: #0e538c;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
 <!--
   Important
 -->
@@ -258,6 +265,12 @@ img {
   .card{
     background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
   }
+  .heading{
+    font-style:italic;
+    padding:5px;
+    letter-spacing:1px;
+    font-weight:solid;
+  }
 {% endblock %}
 {% block body %}
 <div class="o-wrapper">
@@ -286,18 +299,27 @@ img {
 						<span class="o-slider-image-viewer__dot">
 							<img class="o-slider-image-viewer__dot-image" onclick="myFunction(this);" src="/media/{{product.0.image}}">
 						</span><!-- /o-slider-image-viewer__dot -->
+            {% if product.0.image1 %}
 						<span class="o-slider-image-viewer__dot">
 							<img class="o-slider-image-viewer__dot-image" onclick="myFunction(this);"  src="/media/{{product.0.image1}}">
 						</span><!-- /o-slider-image-viewer__dot -->
+            {% endif %}
+            {% if product.0.image2 %}
 						<span class="o-slider-image-viewer__dot">
 							<img class="o-slider-image-viewer__dot-image" onclick="myFunction(this);" src="/media/{{product.0.image2}}">
 						</span><!-- /o-slider-image-viewer__dot -->
+            {% endif %}
+            {% if product.0.image3 %}
 						<span class="o-slider-image-viewer__dot">
               <img class="o-slider-image-viewer__dot-image" onclick="myFunction(this);" src="/media/{{product.0.image3}}">
 						</span><!-- /o-slider-image-viewer__dot -->
+            {% endif %}
+            {% if product.0.image4 %}
 						<span class="o-slider-image-viewer__dot">
 							<img class="o-slider-image-viewer__dot-image" onclick="myFunction(this);" src="/media/{{product.0.image4}}">
 						</span><!-- /o-slider-image-viewer__dot -->
+            {% endif %}
+
 					</div><!-- /o-slider-image-view__nav -->
           
         </div><!-- /o-slider-image-viewer -->
@@ -322,29 +344,31 @@ img {
        </div>
        <div class="verified">
           <span>&#10003;</span>
-          <p>ManuFactured: {{product.0.manufacturer_detail}}</p>
+          <p class="font"><strong>ManuFactured</strong>: {{product.0.manufacturer_detail}}</p>
        </div>
 
        <div class="verified">
         <span>&#10003;</span>
-        <p>Seller: {{product.0.seller_name}}</p>
+        <p class="font"><strong>Seller</strong>: {{product.0.seller_name}}</p>
       </div>
 
       <div class="verified">
         <span>&#10003;</span>
-        <p>Warranty Period: {{product.0.warranty_period}}</p>
+        <p class="font"><strong>Warranty Period</strong>: {{product.0.warranty_period}}</p>
       </div>
       {% if product.0.warranty_period%}
       <div class="verified">
         <span>&#10003;</span>
-        <p>{{product.0.refundable}}</p>
+        <p class="font">{{product.0.refundable}}</p>
       </div>
       {% else %}
       <div class="verified-cross">
         <span>X</span>
-        <p>Non-Refundable</p>
+        <p class="font">Non-Refundable</p>
       </div>
       {% endif %}
+      <!-- {% for key,values in product.0.keyfeature.items %} -->
+      <!-- {% endfor %} -->
 		</div><!-- /c-product-container__element -->
 
 
@@ -355,14 +379,14 @@ img {
 
   <div class="album py-5">
     <div class="container">
-      <h1 style="text-align:center;">More of these type of product</h1>
+      <h1 style="text-align:center;" class="heading">You May Also Like</h1>
       <div class="row">
         {% for i in products %}
-        <div class="col-xs-3 col-sm-3 col-md-3">
+        <div class="col-xs-4 col-sm-4 col-md-4">
           <div class="card shadow-sm">
-            <img src="\media\{{i.image}}" class="bd-placeholder-img card-img-top" width="100%" height="225"aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
+            <img src="\media\{{i.image}}" class="bd-placeholder-img card-img-top" style="width:100%;max-height: 300px;" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
             <div class="card-body">
-                <h1>{{i.product_name}}</h1>
+                <h2>{{i.product_name}}</h2>
               <p class="card-text">{{i.short_desc}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -394,7 +418,7 @@ img {
       expandImg.src = imgs.src;
       expandImg.parentElement.style.display = "block";
       }
-
+      
       //Image Zoomer
     </script>
    {% endblock %}

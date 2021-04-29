@@ -29,7 +29,7 @@
         <h1>Step 3: Fill Your Order Details</h1>
     </div>
     <div class="container alert alert-primary">
-        <form class="row g-3" action="/checkout/{{product.0.product_id}}" method="post">
+        <form class="row g-3" action="/checkout/{{product.0.product_id}}" id="checkout" method="post">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                   <div class="col-md-4">
@@ -136,6 +136,9 @@
                console.log(size2)
                document.getElementById('productsize').value = size2;
             }
+            $('#checkout').submit(function(){
+            $(this).find(':input[type=submit]').prop('disabled', true);
+            });
         </script>
     {% endblock %}
 {% endblock %}
