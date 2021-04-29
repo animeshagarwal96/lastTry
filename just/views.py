@@ -25,7 +25,18 @@ def searchTheProductforShow(query,product):
             if len(products)==3:
                 break
     return products
-
+def shop(request):
+    product = Product.objects.filter(instock = 5)
+    if not product:
+        return render(request,'shop/index.html')
+    category = Product.objects.values('category')
+    cats = {item['category'] for item in category}
+    allprods = []
+    for cat in cats:
+        prod = Product.objects.filter(category=cat)
+        allprods.append(prod)
+    params = {"allprods":allprods}
+    return render(request,'shop/home.html',params)
 def index(request):
     product = Product.objects.filter(instock = 5)
     if not product:

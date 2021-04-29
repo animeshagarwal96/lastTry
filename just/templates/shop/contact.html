@@ -24,6 +24,82 @@
     .mylog{
         width:50px;
     }
+    #contact {
+      width: 100%;
+      height: auto;
+      background-color: #e6b58f;
+    }
+    
+    #contact .container {
+      width: 80%;
+      margin: 0 auto;
+      display: block;
+      padding-bottom: 2rem;
+      text-transform: capitalize;
+    }
+    
+    #contact .container h4 {
+      font-family: "Franklin Gothic Medium";
+      color: #ffffff;
+      font-size: 1.125rem;
+      font-weight: 400;
+      letter-spacing: 0.056rem;
+      text-align: center;
+      text-transform: uppercase;
+      padding-top: 3rem;
+      padding-bottom: 2rem;
+    }
+    
+    #contact .container p {
+      font-family: Cambria;
+      color: #ffffff;
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.044rem;
+      text-align: center;
+      padding: 0.2rem 0rem;
+    }
+    
+    #contact .container p.email {
+      margin: 0 auto;
+      margin-top: 16rem;
+      border-bottom: 1px solid white;
+      text-align: left;
+      width: 40%;
+    }
+    
+    #contact .container p.email span {
+      width: 17px;
+      height: 15px;
+      float: right;
+    }
+    
+    #contact .container p.email span img {
+      width: 17px;
+      height: auto;
+    }
+    
+    @media only screen and (max-width: 800px) {
+      #contact .container p.email {
+        width: 90%;
+      }
+    }
+    .back-to-top {
+      padding: 1rem;
+      position: fixed;
+      bottom: 8%;
+      right: 2%;
+      z-index: 2;
+      opacity: 0.2;
+      background-color: rgba(255, 255, 255, 0);
+    }
+    
+    .back-to-top:hover {
+      -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+      background-color: rgba(255, 255, 255, 0.4);
+      opacity: 1;
+    } 
 {% endblock %}
 {% block contact %}active{% endblock %}
 {% block body %}
@@ -55,42 +131,12 @@
           </form>
     </div>
 
-    <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <div class="row">
-          <div class="col-12 col-md" style="margin-left: 10px;">
-            <img class="mb-2 mylog" src="\media\shop\images\logo_2.png" alt="">
-            <small class="d-block mb-3 text-muted">© 2021–2022</small>
-            <small class="d-block mb-3 text-muted">Mail us on: <a class="link-secondary text-decoration-none" href="#">justclicknpick1@gmail.com</a></small>
-          </div>
-          <div class="col-6 col-md">
-            <h5>Features</h5>
-            <ul class="list-unstyled text-small">
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md">
-            <h5>Resources</h5>
-            <ul class="list-unstyled text-small">
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
-            </ul>
-          </div>
-          <div class="col-6 col-md">
-            <h5>About</h5>
-            <ul class="list-unstyled text-small">
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team@justclicknpick.in</a></li>
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Office: Kolkata</a></li>
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
-              <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
-            </ul>
-          </div>
-        </div>
-      </footer>
+    <section id="contact">
+      <div class="container">
+        <h4>contact us</h4>
+        <p>justclicknpick1@gmail.com</p>
+        <p class="email">emailus <span><img src="https://res.cloudinary.com/de8cuyd0n/image/upload/v1520412541/E-commerce%20landing%20page/icons/get_in_touch_1x.png" alt="email-image"></span></p>
+      </div>
+    </section>
+    <div class="back-to-top"><a href="#nav"> <img title="JC&P." width="50" height="50" src="/media/shop/images/logo_2.png" alt="JC&P"></a> </div>
 {% endblock %}

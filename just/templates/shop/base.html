@@ -28,6 +28,14 @@
 
     <title>{% block title%}{% endblock %}</title>
      <style>
+       *,
+      *:before,
+      *:after {
+        margin: 0;
+        padding: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
        body{
         background-image: linear-gradient(-225deg, #22E1FF 0%, #1D8FE1 48%, #625EB1 100%);
        }
@@ -90,11 +98,7 @@
   margin-left:10px;
   border-radius: 8px;
 }
-/* #myimage:hover .img-zoom-result{
- display: none;
-} */
 
-      
     
        {% block css %} {% endblock %}
   </style>
@@ -112,6 +116,9 @@
     <ul class="nav nav-pills mr-auto">
       <li class="nav-item mx-2">
         <a class="nav-link {% block home %} {% endblock %}" aria-current="page" href="/">HOME</a>
+      </li>
+      <li class="nav-item mx-2">
+        <a class="nav-link {% block shop %} {% endblock %}" aria-current="page" href="/shop">SHOP</a>
       </li>
       <li class="nav-item mx-2">
         <a class="nav-link {% block about %} {% endblock %}" href="/about">ABOUT US</a>
@@ -231,8 +238,6 @@
         </div>
          <div class="modal-footer">
         </div>
-  
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -250,8 +255,5 @@
         imageZoom("myimage", "myresult");
       
       </script>
-      
-
-    
   </body>
 </html>
