@@ -29,11 +29,11 @@ def shop(request):
     product = Product.objects.filter(instock = 5)
     if not product:
         return render(request,'shop/index.html')
-    category = Product.objects.values('category')
-    cats = {item['category'] for item in category}
+    subcategory = Product.objects.values('subcategory')
+    cats = {item['subcategory'] for item in subcategory}
     allprods = []
     for cat in cats:
-        prod = Product.objects.filter(category=cat)
+        prod = Product.objects.filter(subcategory=cat)
         allprods.append(prod)
     params = {"allprods":allprods}
     return render(request,'shop/home.html',params)
