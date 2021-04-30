@@ -42,7 +42,7 @@ class Users(models.Model):
 class Contact(models.Model):
     contact_id = models.AutoField(primary_key = True)
     contact_name = models.CharField(max_length=200,default="")
-    contact_number = models.IntegerField(default="")
+    contact_number = models.CharField(max_length=200,default="")
     contact_email = models.CharField(max_length=200,default="")
     contact_date = models.DateTimeField(auto_now_add = True)
     msg = models.CharField(max_length=1000,default="")
