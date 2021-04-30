@@ -325,14 +325,15 @@ a {
              <a href="#" class="img-wrap" data-abc="true"> <img src="/media/{{i.image}}"> </a>
               <figcaption class="info-wrap">
                   <div class="row">
-                      <div class="col-md-9 col-xs-9"> <a href="#" class="title" data-abc="true">{{i.product_name}}</a> <span class="rated">{{i.subcategory}}</span> </div>
+                      <div class="col-md-9 col-xs-9"> <a href="#" class="title" data-abc="true">{{i.product_name}}</a> <span class="rated">{{i.subcategory}}</span></div>
                       <div class="col-md-3 col-xs-3">
                           <div class="rating text-right"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <span class="rated">Rated 4.0/5</span> </div>
                       </div>
                   </div>
               </figcaption>
               <div class="bottom-wrap"> <a href="\checkout\{{i.product_id}}" class="btn btn-primary float-right" data-abc="true"> Buy now </a>
-                  <div class="price-wrap"> <a href="\product\{{i.product_id}}" class="btn my-btn btn-warning float-left" data-abc="true">View </a> </div>
+              <div class="col-md-9 col-xs-9"> <a href="#" class="title" data-abc="true">₹{{i.product_price}}</a></div>
+              <div class="price-wrap"> <a href="\product\{{i.product_id}}" class="btn my-btn btn-warning float-left" data-abc="true">View </a> </div>
               </div>
           </figure>
       </div>
@@ -349,4 +350,15 @@ a {
     </div>
   </section>
   <div class="back-to-top"><a href="#nav"> <img title="JC&P." width="50" height="50" src="/media/shop/images/logo_2.png" alt="JC&P"></a> </div>
+
+  {% block js %}
+  <script>
+    $(function () {
+        $('#my-welcome-message').firstVisitPopup({
+            cookieName: 'homepag1e',
+            showAgainSelector: '#show-message'
+        });
+    });
+</script>
+  {% endblock %}
 {% endblock %}

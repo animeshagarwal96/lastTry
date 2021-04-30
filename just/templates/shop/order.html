@@ -6,6 +6,7 @@
         display:flex;
         justify-content:center;
         align-items:center;
+        margin:5px;
     }
     .background{
         display:flex;
@@ -118,6 +119,7 @@
             <h5 class="card-title">{{i.product_name}}</h5>
             <p class="card-text">Order At-{{i.delivery_address}} - on {{i.date}} </p>
             <a href="/checkout/{{i.product_id}}" class="btn my btn-primary">Buy Again</a>
+            <p class="card-text">Order Status-{{i.status}}</p>
           </div>
           <div class="card-footer text-muted">
             {{i.date | naturaltime}}
