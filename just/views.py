@@ -47,7 +47,7 @@ def index(request):
     cats = {item['subcategory'] for item in subcategory}
     allprods = []
     for cat in cats:
-        prod = Product.objects.filter(subcategory=cat)
+        prod = Product.objects.filter(subcategory=cat,instock=5)
         allprods.append(prod)
     params = {"allprods":allprods}
     return render(request,'shop/index.html',params)
