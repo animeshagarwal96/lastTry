@@ -274,6 +274,32 @@ a {
     background-color: rgba(255, 255, 255, 0.4);
     opacity: 1;
   } 
+
+  <!--
+    Share
+  -->
+  .whatsapp{
+    width: 50px
+    height: 50px
+    margin: 0 auto
+    text-align: center
+    border: 3px solid green
+    border-radius: 50%
+    transition-duration: 0.5s
+  }
+  .fa-whatsapp{
+    padding-top: 5px
+    font-size: 70px
+    text-decoration: none;
+    color: green
+  }
+
+  &:hover{
+    background-color: green;
+    .fa-whatsapp{
+      color: white
+    }
+  }
 {% endblock %}
 {% block shop %}active{% endblock %}
 {% block body %}
@@ -292,7 +318,11 @@ a {
       {% for i in product %}
       <div class="col-xs-4 col-sm-4 col-md-4">
         <div class="container d-flex justify-content-center">
-          <figure class="card card-product-grid card-lg"> <a href="#" class="img-wrap" data-abc="true"> <img src="/media/{{i.image}}"> </a>
+          <figure class="card card-product-grid card-lg">
+            <!-- <div class="whatsapp" style="margin:20px;">
+              <a class="fa fa-whatsapp" href="https://api.whatsapp.com/send?text=www.justclicknpick.in/product/{{i.product_id}}" target="_blank" data-action="share/whatsapp/share"> Share</a>                
+            </div> -->
+             <a href="#" class="img-wrap" data-abc="true"> <img src="/media/{{i.image}}"> </a>
               <figcaption class="info-wrap">
                   <div class="row">
                       <div class="col-md-9 col-xs-9"> <a href="#" class="title" data-abc="true">{{i.product_name}}</a> <span class="rated">{{i.subcategory}}</span> </div>
