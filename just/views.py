@@ -84,6 +84,7 @@ def checkout(request,id):
         product_name = product[0].product_name
         product_price = product[0].product_price
         product_category = product[0].category
+        product_image = product[0].image
         if product_category == 'Garments' or product_category=='Pants' or product_category =='Kurti':
             category_size = request.POST.get('size')
         else:
@@ -103,25 +104,27 @@ def checkout(request,id):
         if city.lower() != 'kolkata' or state.lower() != 'west bengal':
             messages.error(request,'We dont deliver this product to your place')
             return redirect(request.path)
-        order = Order(product_id=product_id,product_name=product_name,product_price=product_price,product_category=product_category,category_size=category_size,customer_name=customer_name,customer_email=customer_email,customer_phone=customer_phone,alternative_number=alternative_number,delivery_address=delivery_address,Alternate_address=Alternate_address,city=city,state=state,zipCode=zipCode,customer_username = customer_username)
+        order = Order(product_id=product_id,product_name=product_name,product_price=product_price,product_category=product_category,category_size=category_size,product_image=product_image,customer_name=customer_name,customer_email=customer_email,customer_phone=customer_phone,alternative_number=alternative_number,delivery_address=delivery_address,Alternate_address=Alternate_address,city=city,state=state,zipCode=zipCode,customer_username = customer_username)
         order.save()
+        try:
+            #Mail Owner
+            subject = 'Order From JC&P'
+            message = f'Hi Mr Rahul, there is a Order placed by {request.user.first_name} with product {product_name} of Amount Rs {product_price} from JustClickNPick deliver the order as fast as you can to {delivery_address} within 7 working days for in case if the Order gets late contact the Customer or mail them at {customer_email} Payment method is Cash On Delivery'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = ["rahulagarwal24.ad@gmail.com", ]
+            send_mail( subject, message, email_from, recipient_list )
 
-        #Mail Owner
-        # subject = 'Order From JC&P'
-        # message = f'Hi Mr Rahul, there is a Order placed by {request.user.first_name} with product {product_name} of Amount Rs {product_price} from JustClickNPick deliver the order as fast as you can to {delivery_address} within 7 working days for in case if the Order gets late contact the Customer or mail them at {customer_email} Payment method is Cash On Delivery'
-        # email_from = settings.EMAIL_HOST_USER
-        # recipient_list = ["rahulagarwal24.ad@gmail.com", ]
-        # send_mail( subject, message, email_from, recipient_list )
-
-        #Mail thing
-        subject = 'Thank you for Ordering in JC&P'
-        message = f'Hi {customer_firstName}, thank you for Ordering {product_name} of Amount Rs {product_price} from JustClickNPick your Order will be delivered at {delivery_address} within 7 working days for in case if the Order gets late contact us on www.justclicknpick.in/contact or mail us on {settings.EMAIL_HOST_USER} Payment method is Cash On Delivery'
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [customer_email, ]
-        send_mail( subject, message, email_from, recipient_list )
-        messages.success(request,'Your order has been placed successfully')
-
-        return redirect('home')
+            #Mail thing
+            subject = 'Thank you for Ordering in JC&P'
+            message = f'Hi {customer_firstName}, thank you for Ordering {product_name} of Amount Rs {product_price} from JustClickNPick your Order will be delivered at {delivery_address} within 7 working days for in case if the Order gets late contact us on www.justclicknpick.in/contact or mail us on {settings.EMAIL_HOST_USER} Payment method is Cash On Delivery'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [customer_email, ]
+            send_mail( subject, message, email_from, recipient_list )
+            messages.success(request,'Your order has been placed successfully')
+            return redirect('home')
+        except Exception as e:
+            messages.success(request,'Your order has been placed successfully')
+            return redirect('home')
 
     product = Product.objects.filter(product_id = id)
     if not request.user.is_authenticated:
@@ -167,14 +170,18 @@ def handleSignup(request):
             myuser.save()
             user = Users(fname=fname,lname=lname,email=email,password=password1)
             user.save()
-            redirect('home')
-            subject = 'welcome to JC&P world'
-            message = f'Hi {myuser.first_name}, thank you for registering in JustClickNPick your register id is {myuser.email} and Password is {password1}'
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = [myuser.email, ]
-            send_mail( subject, message, email_from, recipient_list )
-            messages.success(request,'Your Acount has been Registered')
-            return redirect('home')
+            try:
+                redirect('home')
+                subject = 'welcome to JC&P world'
+                message = f'Hi {myuser.first_name}, thank you for registering in JustClickNPick your register id is {myuser.email} and Password is {password1}'
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = [myuser.email, ]
+                send_mail( subject, message, email_from, recipient_list )
+                messages.success(request,'Your Acount has been Registered')
+                return redirect('home')
+            except Exception as f:
+                messages.success(request,'Your Acount has been Registered')
+                return redirect('home')
         except Exception as e:
             print(e)
             messages.error(request,'server error occur try again after some time')
@@ -209,13 +216,15 @@ def handleLogout(request):
     else:
         return httpresponse('404 error')
 
+import base64
+def convertToBinaryData(filename):
+    with open(filename, "rb") as img_file:
+        my_string = base64.b64encode(img_file.read())
+    return my_string
+
 def order(request):
     if request.user.is_authenticated:
-        orders = Order.objects.filter(customer_username=request.user.username)
-        imageList = []
-        for i in orders:
-            imageList.append(Product.objects.filter(product_id=i.product_id))
-        allorders = ([orders,imageList])
+        orders = reversed(Order.objects.filter(customer_username=request.user.username))
         return render(request,'shop/order.html',{"orders":orders})
     else:
         messages.warning(request,'You are not logged in please logged in first in order to see your orders')

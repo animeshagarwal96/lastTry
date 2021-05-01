@@ -103,7 +103,168 @@
       background-color: rgba(255, 255, 255, 0.4);
       opacity: 1;
     } 
-    
+  
+  
+  .container-fluid {
+      margin-top: 80px !important;
+      margin-bottom: 80px !important
+  }
+  
+  p {
+      font-size: 14px;
+      margin-bottom: 7px
+  }
+  
+  .cursor-pointer {
+      cursor: pointer
+  }
+  
+  .mylink {
+      text-decoration: none !important;
+      color: #651FFF !important
+  }
+  
+  .bold {
+      font-weight: 600
+  }
+  
+  .small {
+      font-size: 12px !important;
+      letter-spacing: 0.5px !important
+  }
+  
+  .Today {
+      color: rgb(83, 83, 83)
+  }
+  
+  .btn-outline-primary {
+      background-color: #fff !important;
+      color: #4bb8a9 !important;
+      border: 1.3px solid #4bb8a9;
+      font-size: 12px;
+      border-radius: 0.4em !important
+  }
+  
+  .btn-outline-primary:hover {
+      background-color: #4bb8a9 !important;
+      color: #fff !important;
+      border: 1.3px solid #4bb8a9
+  }
+  
+  .btn-outline-primary:focus,
+  .btn-outline-primary:active {
+      outline: none !important;
+      box-shadow: none !important;
+      border-color: #42A5F5 !important
+  }
+  
+  #progressbar {
+      margin-bottom: 30px;
+      overflow: hidden;
+      color: #455A64;
+      padding-left: 0px;
+      margin-top: 30px
+  }
+  
+  #progressbar li {
+      list-style-type: none;
+      font-size: 13px;
+      width: 33.33%;
+      float: left;
+      position: relative;
+      font-weight: 400;
+      color: #455A64 !important
+  }
+  
+  #progressbar #step1:before {
+      content: "1";
+      color: #fff;
+      width: 29px;
+      margin-left: 15px !important;
+      padding-left: 11px !important
+  }
+  
+  #progressbar #step2:before {
+      content: "2";
+      color: #fff;
+      width: 29px
+  }
+  
+  #progressbar #step3:before {
+      content: "3";
+      color: #fff;
+      width: 29px;
+      margin-right: 15px !important;
+      padding-right: 11px !important
+  }
+  
+  #progressbar li:before {
+      line-height: 29px;
+      display: block;
+      font-size: 12px;
+      background: #455A64;
+      border-radius: 50%;
+      margin: auto
+  }
+  
+  #progressbar li:after {
+      content: '';
+      width: 121%;
+      height: 2px;
+      background: #455A64;
+      position: absolute;
+      left: 0%;
+      right: 0%;
+      top: 15px;
+      z-index: -1
+  }
+  
+  #progressbar li:nth-child(2):after {
+      left: 50%
+  }
+  
+  #progressbar li:nth-child(1):after {
+      left: 25%;
+      width: 121%
+  }
+  
+  #progressbar li:nth-child(3):after {
+      left: 25% !important;
+      width: 50% !important
+  }
+  
+  #progressbar li.active:before,
+  #progressbar li.active:after {
+      background: #4bb8a9
+  }
+  
+  .card {
+      background-color: #fff;
+      box-shadow: 2px 4px 15px 0px rgb(0, 108, 170);
+      z-index: 0
+  }
+  
+  small {
+      font-size: 12px !important
+  }
+  
+  .a {
+      justify-content: space-between !important
+  }
+  
+  .border-line {
+      border-right: 1px solid rgb(226, 206, 226)
+  }
+  
+  .card-footer img {
+      opacity: 0.3
+  }
+  
+  .card-footer h5 {
+      font-size: 1.1em;
+      color: #8C9EFF;
+      cursor: pointer
+  }
 {% endblock %}
 {% load humanize %}
 {% block body %}
@@ -111,19 +272,62 @@
     <div class="container background-2">
         {% if orders %}
         {% for i in orders %}
-        <div class="card text-center my-2">
-          <div class="card-header">
-            Orders
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">{{i.product_name}}</h5>
-            <p class="card-text">Order At-{{i.delivery_address}} - on {{i.date}} </p>
-            <a href="/checkout/{{i.product_id}}" class="btn my btn-primary">Buy Again</a>
-            <p class="card-text">Order Status-{{i.status}}</p>
-          </div>
-          <div class="card-footer text-muted">
-            {{i.date | naturaltime}}
-          </div>
+          <div class="container-fluid my-5 d-sm-flex justify-content-center">
+            <div class="card px-2">
+                <div class="card-header bg-white">
+                    <div class="row justify-content-between">
+                        <div class="col">
+                            <p class="text-muted"> Order ID <span class="font-weight-bold text-dark">{{i.order_id}}</span></p>
+                            <p class="text-muted"> Place On <span class="font-weight-bold text-dark">{{i.date}}</span> </p>
+                        </div>
+                        <div class="flex-col my-auto">
+                            <h6 class="ml-auto mr-3"> <a class="mylink" href="\product\{{i.product_id}}">View Details</a> </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="media flex-column flex-sm-row">
+                        <div class="media-body ">
+                            <h5 class="bold">{{i.product_name}}</h5>
+                            <p class="text-muted"> Qt: 1 </p>
+                            <h4 class="mt-3 mb-4 bold"> <span class="mt-5">&#x20B9;</span>{{i.product_price}}<span class="small text-muted"> via (COD) </span></h4>
+                        </div><img class="align-self-center img-fluid" src="/media/{{i.product_image}}" width="180 " height="180">
+                    </div>
+                </div>
+                <div class="row px-3">
+                    <div class="col">
+                        {%if i.status == 'Order Placed' %}
+                        <ul id="progressbar">
+                          <li class="step0 active " id="step1">PLACED</li>
+                          <li class="step0 text-center" id="step2">SHIPPED</li>
+                          <li class="step0 text-muted text-right" id="step3">DELIVERED</li>
+                        </ul>
+                        {% elif i.status == 'Order Confirmed' %}
+                        <ul id="progressbar">
+                            <li class="step0 active " id="step1">PLACED</li>
+                            <li class="step0 active text-center" id="step2">SHIPPED</li>
+                            <li class="step0 text-muted text-right" id="step3">DELIVERED</li>
+                        </ul>
+                        {% elif i.status == 'Delivered' %}
+                        <ul id="progressbar">
+                          <li class="step0 active " id="step1">PLACED</li>
+                          <li class="step0 active text-center" id="step2">SHIPPED</li>
+                          <li class="step0 active text-muted text-right" id="step3">DELIVERED</li>
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-footer bg-white px-sm-3 pt-sm-4 px-0">
+                    <div class="row text-center ">
+                        <div class="col-md-6 my-auto border-line ">
+                            <a href="\checkout\{{i.product_id}}">Buy Again</a>
+                        </div>
+                        <div class="col-md-6 my-auto border-line ">
+                          <h5>{{i.date | naturaltime}}</h5>
+                      </div>
+                    </div>
+                </div>
+            </div>
         </div>
           {% endfor %}
           {% else %}
