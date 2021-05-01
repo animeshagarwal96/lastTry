@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
 from django.core.mail import send_mail
 
+
 # Create your views here.
 
 def searchTheProduct(query,product):
@@ -170,22 +171,21 @@ def handleSignup(request):
             user = Users(fname=fname,lname=lname,email=email,password=password1)
             user.save()
             try:
-                redirect('home')
                 subject = 'welcome to JC&P world'
                 message = f'Hi {myuser.first_name}, thank you for registering in JustClickNPick your register id is {myuser.email} and Password is {password1}'
                 email_from = settings.EMAIL_HOST_USER
                 recipient_list = [myuser.email, ]
                 send_mail( subject, message, email_from, recipient_list )
                 messages.success(request,'Your Acount has been Registered')
-                return redirect('home')
+                return redirect(request.META.get('HTTP_REFERER'))
             except Exception as f:
                 messages.success(request,'Your Acount has been Registered')
-                return redirect('home')
+                return redirect(request.META.get('HTTP_REFERER'))
         except Exception as e:
             print(e)
             messages.error(request,'server error occur try again after some time')
-            return redirect('home')
-        return redirect('home')
+            return redirect(request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER'))
     else: 
         return httpresponse('404 Error')
 
@@ -200,10 +200,10 @@ def handleLogin(request):
         if user is not None:
             login(request,user)
             messages.success(request,'Successfully logged in')
-            return redirect('home')
+            return redirect(request.META.get('HTTP_REFERER'))
         else:
             messages.error(request, "Invalid credentials! Please try again")
-            return redirect('home')
+            return redirect(request.META.get('HTTP_REFERER'))
     else:
         return httpresponse('404 - not found')
 
@@ -211,7 +211,7 @@ def handleLogout(request):
     if request.user.is_authenticated:
         logout(request)
         messages.success(request,'Successfully logged out')
-        return redirect('home')
+        return redirect(request.META.get('HTTP_REFERER'))
     else:
         return httpresponse('404 error')
 
