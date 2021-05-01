@@ -60,7 +60,6 @@ class Order(models.Model):
     product_name = models.CharField(max_length=100)
     product_price = models.CharField(max_length=100)
     product_category = models.CharField(max_length=100)
-    image = models.CharField(max_length=100,default="",blank=True)
     category_size = models.CharField(max_length=100,default="no size",blank=True)
     customer_name = models.CharField(max_length=100)
     customer_email = models.CharField(max_length=200)
