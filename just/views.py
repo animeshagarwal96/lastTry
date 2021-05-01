@@ -106,13 +106,6 @@ def checkout(request,id):
         order = Order(product_id=product_id,product_name=product_name,product_price=product_price,product_category=product_category,category_size=category_size,customer_name=customer_name,customer_email=customer_email,customer_phone=customer_phone,alternative_number=alternative_number,delivery_address=delivery_address,Alternate_address=Alternate_address,city=city,state=state,zipCode=zipCode,customer_username = customer_username)
         order.save()
 
-        #Mail Owner
-        subject = 'Order From JC&P'
-        message = f'Hi Mr Rahul, there is a Order placed by {request.user.first_name} with product {product_name} of Amount Rs {product_price} from JustClickNPick deliver the order as fast as you can to {delivery_address} within 7 working days for in case if the Order gets late contact the Customer or mail them at {customer_email} Payment method is Cash On Delivery'
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = ["rahulagarwal24.ad@gmail.com", ]
-        send_mail( subject, message, email_from, recipient_list )
-
         #Mail thing
         subject = 'Thank you for Ordering in JC&P'
         message = f'Hi {customer_firstName}, thank you for Ordering {product_name} of Amount Rs {product_price} from JustClickNPick your Order will be delivered at {delivery_address} within 7 working days for in case if the Order gets late contact us on www.justclicknpick.in/contact or mail us on {settings.EMAIL_HOST_USER} Payment method is Cash On Delivery'
