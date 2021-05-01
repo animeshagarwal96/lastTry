@@ -99,7 +99,7 @@
             Cash on Delivery
           </div>
           <div class="alert alert-primary" role="alert">
-           Rs.0 Delivery Charges
+           Delivery Charges Free
           </div>
     </div>
     <div class="container">
@@ -119,7 +119,6 @@
                       {% if product.0.category == 'Pants' or product.0.category == 'Garments' or product.0.category == 'Kurti'%}
                       <span>Select Size </span>
                       <select name="size" id="size" class="form-select">
-                        <!-- <option selected>Open this select menu</option> -->
                         {% if product.0.size1%}
                         <option >{{product.0.size1}}</option>
                         {% endif %}
@@ -142,10 +141,6 @@
                   </div>
                 </div>
               </div>
-            <input type="hidden" name="id" id="id" value="{{product.0.product_id}}">
-            <input type="hidden" name="productname" id="productname" value="{{product.0.product_name}}">
-            <input type="hidden" name="price" id="price" value="{{product.0.product_price}}">
-            <input type="hidden" name="category" id="category" value="{{product.0.category}}">
             {% csrf_token %}
             <div class="col-md-12">
                 <label for="name" class="form-label">Your Full Name</label>
