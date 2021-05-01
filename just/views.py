@@ -84,7 +84,7 @@ def checkout(request,id):
         product_name = product[0].product_name
         product_price = product[0].product_price
         product_category = product[0].category
-        product_image = product[0].image
+        image = product[0].image
         if product_category == 'Garments' or product_category=='Pants' or product_category =='Kurti':
             category_size = request.POST.get('size')
         else:
@@ -104,7 +104,7 @@ def checkout(request,id):
         if city.lower() != 'kolkata' or state.lower() != 'west bengal':
             messages.error(request,'We dont deliver this product to your place')
             return redirect(request.path)
-        order = Order(product_id=product_id,product_name=product_name,product_price=product_price,product_category=product_category,category_size=category_size,product_image=product_image,customer_name=customer_name,customer_email=customer_email,customer_phone=customer_phone,alternative_number=alternative_number,delivery_address=delivery_address,Alternate_address=Alternate_address,city=city,state=state,zipCode=zipCode,customer_username = customer_username)
+        order = Order(product_id=product_id,product_name=product_name,product_price=product_price,product_category=product_category,category_size=category_size,image=image,customer_name=customer_name,customer_email=customer_email,customer_phone=customer_phone,alternative_number=alternative_number,delivery_address=delivery_address,Alternate_address=Alternate_address,city=city,state=state,zipCode=zipCode,customer_username = customer_username)
         order.save()
         try:
             #Mail Owner
@@ -215,12 +215,6 @@ def handleLogout(request):
         return redirect('home')
     else:
         return httpresponse('404 error')
-
-import base64
-def convertToBinaryData(filename):
-    with open(filename, "rb") as img_file:
-        my_string = base64.b64encode(img_file.read())
-    return my_string
 
 def order(request):
     if request.user.is_authenticated:
