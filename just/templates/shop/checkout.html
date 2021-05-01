@@ -116,25 +116,25 @@
                     <div class="card-body">
                       <h5 class="card-title">{{product.0.product_name}}</h5>
                       <p class="card-text">{{product.0.short_desc}}</p>
-                      {% if product.0.category == 'Pants'%}
-                      <span>Select Size </span>
-                      <select name="size2" id="size2" class="form-select">
-                        <!-- <option selected>Open this select menu</option> -->
-                        <option >28</option>
-                        <option selected>30</option>
-                        <option >32</option>
-                        <option >34</option>
-                        <option >36</option>
-                      </select>
-                      {% elif product.0.category == 'Garments' %}
+                      {% if product.0.category == 'Pants' or product.0.category == 'Garments' or product.0.category == 'Kurti'%}
                       <span>Select Size </span>
                       <select name="size" id="size" class="form-select">
                         <!-- <option selected>Open this select menu</option> -->
-                        <option >Small</option>
-                        <option selected>Medium</option>
-                        <option >Large</option>
-                        <option >Extra-large</option>
-                        <option >Extra-Extra-Large</option>
+                        {% if product.0.size1%}
+                        <option >{{product.0.size1}}</option>
+                        {% endif %}
+                        {% if product.0.size2%}
+                        <option selected>{{product.0.size2}}</option>
+                        {% endif %}
+                        {% if product.0.size3%}
+                        <option >{{product.0.size3}}</option>
+                        {% endif %}
+                        {% if product.0.size4%}
+                        <option >{{product.0.size4}}</option>
+                        {% endif %}
+                        {% if product.0.size5%}
+                        <option >{{product.0.size5}}</option>
+                        {% endif %}
                       </select>
                       {% endif %}
                       <p class="card-text"><small class="text-muted">₹{{product.0.product_price}}</small></p>
@@ -160,7 +160,7 @@
               <input type="tel" name="phone" class="form-control" id="phone" placeholder="Your Phone Number" required>
             </div>
             <div class="col-md-6">
-                <label for="phone2" class="form-label">Phone-2</label>
+                <label for="phone2" class="form-label">Alternate Phone</label>
                 <input type="tel" name="phone2" class="form-control" id="phone2" placeholder="Your Alternate Number" required>
               </div>
             <div class="col-12">

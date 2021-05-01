@@ -83,10 +83,8 @@ def checkout(request,id):
         product_name = request.POST.get('productname')
         product_price = request.POST.get('price')
         product_category = request.POST.get('category')
-        if product_category == 'Garments':
+        if product_category == 'Garments' or product_category=='Pants' or product_category =='Kurti':
             category_size = request.POST.get('size')
-        elif product_category == 'Pants':
-            category_size = request.POST.get('size2')
         else:
             category_size = ""
         customer_name = request.POST.get('name')

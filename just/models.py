@@ -4,7 +4,6 @@ from django.contrib.postgres.fields import JSONField
 # Create your models here.
 
 
-
 class Product(models.Model):
     product_id = models.AutoField(primary_key=True)
     product_name = models.CharField(max_length=100,blank=False)
@@ -23,6 +22,11 @@ class Product(models.Model):
     image2 = models.ImageField(upload_to="shop/images",blank=True)
     image3 = models.ImageField(upload_to="shop/images",blank=True)
     image4 = models.ImageField(upload_to="shop/images",blank=True)
+    size1 = models.CharField(max_length=100,default="",blank=True)
+    size2 = models.CharField(max_length=100,default="",blank=True)
+    size3 = models.CharField(max_length=100,default="",blank=True)
+    size4 = models.CharField(max_length=100,default="",blank=True)
+    size5 = models.CharField(max_length=100,default="",blank=True)
     instock = models.CharField(max_length=100,blank=True)
 
 
@@ -56,13 +60,13 @@ class Order(models.Model):
     product_name = models.CharField(max_length=100)
     product_price = models.CharField(max_length=100)
     product_category = models.CharField(max_length=100)
-    category_size = models.CharField(max_length=100,default="no size")
+    category_size = models.CharField(max_length=100,default="no size",blank=True)
     customer_name = models.CharField(max_length=100)
     customer_email = models.CharField(max_length=200)
     customer_phone = models.CharField(max_length=100)
     alternative_number = models.CharField(max_length=100)
     delivery_address = models.CharField(max_length=500)
-    Alternate_address = models.CharField(max_length=500)
+    Alternate_address = models.CharField(max_length=500,blank=True)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     zipCode = models.CharField(max_length=50)
