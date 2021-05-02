@@ -28,14 +28,14 @@ def searchTheProductforShow(query,product):
     return products
     
 def shop(request):
-    product = Product.objects.filter(instock = 5)
+    product = Product.objects.all()
     if not product:
         return render(request,'shop/index.html')
     subcategory = Product.objects.values('subcategory')
     cats = {item['subcategory'] for item in subcategory}
     allprods = []
     for cat in cats:
-        prod = Product.objects.filter(subcategory=cat)
+        prod = Product.objects.filter(subcategory=cat,instock__gte = 1)
         allprods.append(prod)
     params = {"allprods":allprods}
     return render(request,'shop/home.html',params)
@@ -48,7 +48,7 @@ def index(request):
     cats = {item['subcategory'] for item in subcategory}
     allprods = []
     for cat in cats:
-        prod = Product.objects.filter(subcategory=cat)
+        prod = Product.objects.filter(subcategory=cat,instock__gte = 1)
         allprods.append(prod)
     params = {"allprods":allprods}
     return render(request,'shop/index.html',params)
@@ -75,7 +75,7 @@ def search(request):
         if len(query) == 0:
             messages.info(request,"Cannot search an Empty field")
             return redirect(request.META.get('HTTP_REFERER'))
-        product = Product.objects.all()
+        product = Product.objects.filter(instock__gte = 1)
         products = searchTheProduct(query.lower(),product)
     length = len(products)
     
@@ -129,7 +129,7 @@ def checkout(request,id):
             messages.success(request,'Your order has been placed successfully')
             return redirect('home')
 
-    product = Product.objects.filter(product_id = id)
+    product = Product.objects.filter(product_id = id,instock__gte = 1)
     if not request.user.is_authenticated:
         messages.error(request,'Please log in Proceed Further')
     if len(product) > 0:
@@ -137,7 +137,7 @@ def checkout(request,id):
     return httpresponse("404 error")
 
 def product(request,id):
-    product = Product.objects.filter(product_id=id)
+    product = Product.objects.filter(product_id=id,instock__gte = 1)
     if not product:
         return httpresponse("404 Error")
     query = product[0].category
