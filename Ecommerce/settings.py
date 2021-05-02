@@ -137,6 +137,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Activate Django-heroku
 django_heroku.settings(locals())
 
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 MESSAGE_TAGS = {
     messages.ERROR : 'danger'
 }

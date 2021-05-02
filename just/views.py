@@ -72,6 +72,8 @@ def about(request):
 def search(request):
     if request.method == "GET":
         query = request.GET.get('search')
+        messages.info(request,"Cannot search an Empty field")
+        return redirect(request.META.get('HTTP_REFERER'))
         product = Product.objects.all()
         products = searchTheProduct(query.lower(),product)
     length = len(products)
