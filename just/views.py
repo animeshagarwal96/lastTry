@@ -41,7 +41,7 @@ def shop(request):
     return render(request,'shop/home.html',params)
 
 def index(request):
-    product = Product.objects.filter(instock = 5)
+    product = Product.objects.all()
     if not product:
         return render(request,'shop/index.html')
     subcategory = Product.objects.values('subcategory')
@@ -131,7 +131,7 @@ def checkout(request,id):
 
     product = Product.objects.filter(product_id = id,instock__gte = 1)
     if not request.user.is_authenticated:
-        messages.error(request,'Please log in Proceed Further')
+        messages.error(request,'Please log in to proceed further')
     if len(product) > 0:
         return render(request,'shop/checkout.html',{"product":product})
     return httpresponse("404 error")
