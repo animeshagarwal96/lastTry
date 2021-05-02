@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse as httpresponse
-from .models import Product,Users,Contact,Order
+from .models import Product,Users,Contact,Order,ProductComment
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -140,12 +140,13 @@ def product(request,id):
     product = Product.objects.filter(product_id=id,instock__gte = 1)
     if not product:
         return httpresponse("404 Error")
+    comments = ProductComment.objects.filter(product = product[0])
     query = product[0].category
     query = query.lower()
     allprods = Product.objects.all()
     products = searchTheProductforShow(query.lower(),allprods)
-    
-    return render(request,'shop/product.html',{'product':product,'products':products})
+    params = {'product':product,'products':products,'comments':comments,'user':request.user}
+    return render(request,'shop/product.html',params)
 
 def handleSignup(request):
     if request.method=="POST":
@@ -225,4 +226,15 @@ def order(request):
     else:
         messages.warning(request,'please log in first to see your orders')
         return render(request,'shop/order.html')
+
+def productComment(request):
+    if request.method=="POST":
+        comments = request.POST.get("comment")
+        user = request.user
+        product_id = request.POST.get("product_id")
+        product = Product.objects.get(product_id=product_id)
+        comment = ProductComment(comments=comments,user=user,product=product)
+        comment.save()
+        messages.success(request,"Your comment has been posted succesfully")
+    return redirect(request.META.get('HTTP_REFERER'))
         
