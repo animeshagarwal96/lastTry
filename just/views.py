@@ -131,7 +131,7 @@ def checkout(request,id):
 
     product = Product.objects.filter(product_id = id)
     if not request.user.is_authenticated:
-        messages.error(request,'please logged in first in order to Place any orders')
+        messages.error(request,'Please log in Proceed Further')
     if len(product) > 0:
         return render(request,'shop/checkout.html',{"product":product})
     return httpresponse("404 error")
@@ -223,6 +223,6 @@ def order(request):
         orders = reversed(Order.objects.filter(customer_username=request.user.username))
         return render(request,'shop/order.html',{"orders":orders})
     else:
-        messages.warning(request,'please logged in first in order to see your orders')
+        messages.warning(request,'please log in first to see your orders')
         return render(request,'shop/order.html')
         
