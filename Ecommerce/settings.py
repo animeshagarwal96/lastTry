@@ -137,8 +137,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Activate Django-heroku
 django_heroku.settings(locals())
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE=True
 
 MESSAGE_TAGS = {
