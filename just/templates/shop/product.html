@@ -341,18 +341,137 @@ img {
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
     background-color: rgba(255, 255, 255, 0.4);
     opacity: 1;
-  } 
-  @media (max-width:1024px){
-    .rounded{
-      padding:0;
-    }
-  }
-  @media (max-width:640px){
-    .rounded{
-      max-width:16%;
-    }
-  }
+  }  
 
+  <!--
+    comments
+  -->
+  .content-item {
+    padding:30px 0;
+	background-color:#FFFFFF;
+}
+
+.content-item.grey {
+	background-color:#F0F0F0;
+	padding:50px 0;
+	height:100%;
+}
+
+.content-item h2 {
+	font-weight:700;
+	font-size:35px;
+	line-height:45px;
+	text-transform:uppercase;
+	margin:20px 0;
+}
+
+.content-item h3 {
+	font-weight:400;
+	font-size:20px;
+	color:#555555;
+	margin:10px 0 15px;
+	padding:0;
+}
+
+.content-headline {
+	height:1px;
+	text-align:center;
+	margin:20px 0 70px;
+}
+
+.content-headline h2 {
+	background-color:#FFFFFF;
+	display:inline-block;
+	margin:-20px auto 0;
+	padding:0 20px;
+}
+
+.grey .content-headline h2 {
+	background-color:#F0F0F0;
+}
+
+.content-headline h3 {
+	font-size:14px;
+	color:#AAAAAA;
+	display:block;
+}
+
+
+#comments {
+	background-color:#FFFFFF;
+}
+
+#comments form {
+	margin-bottom:30px;
+}
+
+#comments .btn {
+	margin-top:7px;
+}
+
+#comments form fieldset {
+	clear:both;
+}
+
+#comments form textarea {
+	height:100px;
+}
+
+#comments .media {
+	padding:20px 0;
+	margin:0;
+}
+
+#comments .media > .pull-left {
+    margin-right:20px;
+}
+
+#comments .media img {
+	max-width:100px;
+}
+
+#comments .media h4 {
+	margin:0 0 10px;
+}
+
+#comments .media h4 span {
+	font-size:14px;
+	float:right;
+	color:#999999;
+}
+
+#comments .media p {
+	margin-bottom:15px;
+	text-align:justify;
+}
+
+#comments .media-detail {
+	margin:0;
+}
+
+#comments .media-detail li {
+	color:#AAAAAA;
+	font-size:12px;
+	padding-right: 10px;
+	font-weight:600;
+}
+
+#comments .media-detail a:hover {
+	text-decoration:underline;
+}
+
+#comments .media-detail li:last-child {
+	padding-right:0;
+}
+
+#comments .media-detail li i {
+	color:#666666;
+	font-size:15px;
+	margin-right:10px;
+}
+.round img {
+  border-radius: 10%;
+}
 {% endblock %}
 {% block body %}
 <div class="o-wrapper">
@@ -487,32 +606,47 @@ img {
   <!-- Comments -->
   {% load humanize %}
   <div class="container">
-    <h2>All Review for {{product.0.product_name}} ({{comments.count}})</h2>
+    <h2>All Review for {{product.0.product_name}}</h2>
     {% if user.is_authenticated %}
     <form action="/postcomment" method="post">   
       <div class="form-group">
         <label for="comment">Post Review</label>
-        <input type="text" class="form-control" id="comment" name="comment" placeholder="Enter review here">
+        {% if comments.count == 0 %}
+        <input type="text" class="form-control" id="comment" name="comment" placeholder="Be the first to post a review about this product">
+        {% else %}
+        <input type="text" class="form-control" id="comment" name="comment" placeholder="Post review here">
+        {% endif %}
         <input type="hidden" name="product_id" value="{{product.0.product_id}}">
       </div>
       {% csrf_token %}
-      <button type="submit" class="btn btn-primary">Post</button>
+      <button type="submit" class="btn btn-primary my-1">Post</button>
     </form>
     {% else %}
     <div class="alert alert-warning col-12" role="alert">
       Please login first to post a review
     </div>
     {% endif %}
+    <h3>{{comments.count}} Reviews</h3>
     {% for comment in comments %}
-    <div class="row my-3">
-      <div class="col-md-1">
-        <img class="rounded mx-auto w-100 p-2 border border-dark" src="/media/shop/images/user.png" alt="{{comment.user.first_name}}">
+    <section class="content-item" id="comments"> 
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8">   
+            <div class="media">
+              <div class="p-2"><span class="round"><img src="/media/shop/images/user.png" class="border border-dark" alt="user" width="50"></span></div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{comment.user.first_name}}</h4>
+                    <p>{{comment.comments}}</p>
+                    <ul class="list-unstyled list-inline media-detail pull-left">
+                        <li><i class="fa fa-calendar"></i>{{comment.timezone}}</li>
+                        <span class="badge badge-secondary">{{comment.timezone | naturaltime}}</span>
+                    </ul>
+                </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-md-11">
-        <strong>{{comment.user.first_name}}</strong><small class="m-2">posted</small><span class="p-1 badge badge-secondary">{{comment.timezone | naturaltime}}</span>
-        <div>{{comment.comments}}</div>
-      </div>
-    </div>
+    </section>
     {% endfor %}
   </div>
   {% block js %}
