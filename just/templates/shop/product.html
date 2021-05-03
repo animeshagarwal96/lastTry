@@ -258,7 +258,9 @@ img {
     padding bottom: 0px;
   }
   .card{
-    background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+    background-color: #ffffff;
+	  background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%);
+	  margin:10px;
   }
   .heading{
     font-style:italic;
@@ -472,6 +474,40 @@ img {
 .round img {
   border-radius: 10%;
 }
+
+
+.img-wrap {
+	border-radius: 0.2rem 0.2rem 0 0;
+	height: 220px
+  }
+  
+  .img-wrap {
+	overflow: hidden
+  }
+  
+  .img-wrap {
+	height: 280px
+  }
+  
+  .img-wrap {
+	border-radius: 0.2rem 0.2rem 0 0;
+	height: 275px;
+	padding: 16px
+  }
+  
+	.img-wrap img {
+	height: 100%;
+	max-width: 100%;
+	width: auto;
+	display: inline-block;
+	-o-object-fit: cover;
+	object-fit: cover
+  }
+  
+  .img-wrap {
+	text-align: center;
+	display: block
+  }
 {% endblock %}
 {% block body %}
 <div class="o-wrapper">
@@ -579,30 +615,38 @@ img {
 <!-- -->
 
   <div class="album py-5">
-    <div class="container">
+    <div class="container mt-5 mb-5"">
       <h1 style="text-align:center;" class="heading">You May Also Like</h1>
       <div class="row">
         {% for i in products %}
         <div class="col-xs-4 col-sm-4 col-md-4 tune">
-          <div class="card shadow-sm">
-            <img src="\media\{{i.image}}" class="bd-placeholder-img card-img-top" style="width:100%;max-height: 300px;" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
-            <div class="card-body">
-                <h2>{{i.product_name}}</h2>
-              <p class="card-text">{{i.short_desc}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary" href="/checkout/{{i.product_id}}">Buy Now</a>
-                  <a class="btn btn-sm btn-outline-secondary" href="/product/{{i.product_id}}">Quick view</a>
+          <div class="card">
+            <div class="view zoom overlay">
+              <a href="/product/{{i.product_id}}">
+                <div class="mask">
+                  <img class="img-fluid img-wrap w-100"
+                    src="/media/{{i.image}}">
+                  <div class="mask rgba-black-slight"></div>
                 </div>
-                <small class="text-muted">₹{{i.product_price}}</small>
-              </div>
+              </a>
             </div>
+
+            <div class="card-body text-center">
+              <h5>{{i.product_name}}</h5>
+              <p class="small text-muted text-uppercase mb-2">{{i.subcategory}}</p>
+              <hr>
+              <h6 class="mb-3">
+                <span class="text-primary mr-1">₹{{i.product_price}}</span>
+              </h6>
+            </div>
+
           </div>
         </div>
         {% endfor %}
       </div>
     </div>
   </div>
+
   <!-- Comments -->
   {% load humanize %}
   <div class="container">
