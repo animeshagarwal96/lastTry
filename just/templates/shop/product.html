@@ -606,7 +606,7 @@ img {
   <!-- Comments -->
   {% load humanize %}
   <div class="container">
-    <h2>All Review for {{product.0.product_name}}</h2>
+    <h2>All Reviews for {{product.0.product_name}}</h2>
     {% if user.is_authenticated %}
     <form action="/postcomment" method="post">   
       <div class="form-group">

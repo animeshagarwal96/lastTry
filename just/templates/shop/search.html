@@ -85,6 +85,75 @@
 	background-color: rgba(255, 255, 255, 0.4);
 	opacity: 1;
 } 
+.ratings i {
+    font-size: 16px;
+    color: red
+}
+
+.strike-text {
+    color: red;
+    text-decoration: line-through
+}
+
+.product-image {
+    width: 100%
+}
+
+.dot {
+    height: 7px;
+    width: 7px;
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-top: 3px;
+    background-color: blue;
+    border-radius: 50%;
+    display: inline-block
+}
+
+.spec-1 {
+    color: #938787;
+    font-size: 15px
+}
+
+h5 {
+    font-weight: 400
+}
+
+.para {
+    font-size: 16px
+} 
+.img-wrap {
+	border-radius: 0.2rem 0.2rem 0 0;
+	height: 220px
+  }
+  
+  .img-wrap {
+	overflow: hidden
+  }
+  
+  .img-wrap {
+	height: 280px
+  }
+  
+  .img-wrap {
+	border-radius: 0.2rem 0.2rem 0 0;
+	height: 275px;
+	padding: 16px
+  }
+  
+	.img-wrap img {
+	height: 100%;
+	max-width: 100%;
+	width: auto;
+	display: inline-block;
+	-o-object-fit: cover;
+	object-fit: cover
+  }
+  
+  .img-wrap {
+	text-align: center;
+	display: block
+  }
 {% endblock %}
 {% block body %}
     <div class="album py-5">
@@ -92,23 +161,28 @@
       <h1 class="my-4" style="text-align: center;">Search result-<span class="badge">{{length}}</span></h1>
       <div class="row">
         {% for i in products%}
-        <div class="col-xs-3 col-sm-3 col-md-3">
-          <div class="card shadow-sm">
-            <img src="\media\{{i.image}}" class="bd-placeholder-img card-img-top" style="width:100%;max-height: 300px;" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/>
-
-            <div class="card-body">
-                <h1>{{i.product_name}}</h1>
-              <p class="card-text">{{i.desc}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a class="btn btn-sm btn-outline-secondary" href="/checkout/{{i.product_id}}">Buy Now</a>
-                  <a class="btn btn-sm btn-outline-secondary" href="/product/{{i.product_id}}">Quick view</a>
-                </div>
-                <small class="text-muted">₹{{i.product_price}}</small>
-              </div>
-            </div>
-          </div>
-        </div>
+			<div class="container mt-1 mb-1">
+				<div class="d-flex justify-content-center row">
+					<div class="col-md-10">
+						<div class="row p-2 bg-white border rounded">
+							<div class="col-md-3 mt-1"><img class="img-wrap img-fluid img-responsive rounded product-image" src="/media/{{i.image}}"></div>
+							<div class="col-md-6 mt-1">
+								<h5>{{i.product_name}}</h5>
+								<div class="d-flex flex-row">
+									<div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>₹{{i.product_price}}</span>
+								</div>
+								<div class="mt-1 mb-1 spec-1"><span>{{i.manufacturer_detail}}</span></div>
+								<div class="mt-1 mb-1 spec-1"><span>{{i.seller_name}}</span><span class="dot"></span><span>stock left: {{i.instock}}</span></div>
+								<p class="text-justify text-truncate para mb-0">{{i.desc}}<br><br></p>
+							</div>
+							<div class="align-items-center align-content-center col-md-3 border-left mt-1">
+								<h6 class="text-success">Free shipping</h6>
+								<div class="d-flex flex-column mt-4"><a class="btn btn-primary btn-sm" href="/product/{{i.product_id}}">Details View</a><a class="btn btn-outline-primary btn-sm mt-2" href="/checkout/{{i.product_id}}">Buy Now</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
         {% endfor %}
       </div>
     </div>
