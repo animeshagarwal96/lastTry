@@ -1,9 +1,6 @@
 {% extends 'shop/base.html' %}
 {% block title %}Search{% endblock %}
 {% block css %} 
-.card{
-  background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
-}
 @media screen and (max-width: 899px) {
 	.card{
 		margin:10px;
@@ -154,6 +151,50 @@ h5 {
 	text-align: center;
 	display: block
   }
+
+  <!--
+	  imp
+  -->
+  .badge23 {
+    display: inline-block;
+    padding: 0.30em .4em;
+    font-size: 75%;
+    font-weight: 300;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    color: #fff;
+    background-color: #28a745
+}
+
+.rating-review {
+    color: #5b5b5b;
+    font-size: 12px
+}
+
+.product_price {
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 400;
+    margin-top: -11px;
+    margin-bottom: 0px;
+    color: #080808;
+    clear: left
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .125)
+}
+
+.seperator {
+    background: #a2a2efb8
+}
 {% endblock %}
 {% block body %}
     <div class="album py-5">
@@ -161,28 +202,27 @@ h5 {
       <h1 class="my-4" style="text-align: center;">Search result-<span class="badge">{{length}}</span></h1>
       <div class="row">
         {% for i in products%}
-			<div class="container mt-1 mb-1">
-				<div class="d-flex justify-content-center row">
-					<div class="col-md-10">
-						<div class="row p-2 bg-white border rounded">
-							<div class="col-md-3 mt-1"><img class="img-wrap img-fluid img-responsive rounded product-image" src="/media/{{i.image}}"></div>
-							<div class="col-md-6 mt-1">
-								<h5>{{i.product_name}}</h5>
-								<div class="d-flex flex-row">
-									<div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>₹{{i.product_price}}</span>
-								</div>
-								<div class="mt-1 mb-1 spec-1"><span>{{i.manufacturer_detail}}</span></div>
-								<div class="mt-1 mb-1 spec-1"><span>{{i.seller_name}}</span><span class="dot"></span><span>stock left: {{i.instock}}</span></div>
-								<p class="text-justify text-truncate para mb-0">{{i.desc}}<br><br></p>
-							</div>
-							<div class="align-items-center align-content-center col-md-3 border-left mt-1">
-								<h6 class="text-success">Free shipping</h6>
-								<div class="d-flex flex-column mt-4"><a class="btn btn-primary btn-sm" href="/product/{{i.product_id}}">Details View</a><a class="btn btn-outline-primary btn-sm mt-2" href="/checkout/{{i.product_id}}">Buy Now</a></div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="col-lg-12 mx-auto">
+            <ul class="list-group shadow">
+                <li class="list-group-item">
+                    <div class="media align-items-lg-center flex-column flex-lg-row"> <img src="/media/{{i.image}}" alt="Generic placeholder image" width="250" height="200" class="order-1 order-lg-1">
+                        <div class="media-body order-2 order-lg-2 ml-lg-5">
+                            <h5 class="mt-0 mb-1">{{i.product_name}}</h5>
+                            <div class="product-rating mb-2"> <span class="badge23"><i class="fa fa-star"></i> 4 Star</span> <span class="rating-review mb-1">4 Ratings</span> </div> <span class="product_price price-new">₹ {{i.product_price}} </span>
+                            <hr class="mb-2 mt-1 seperator">
+                            <div class="d-flex align-items-center justify-content-between mt-1">
+                                <ul class="list-inline small">
+									<li><img src="https://img.icons8.com/material-outlined/10/000000/filled-circle--v1.png">{{i.short_desc}}</li>
+                                    <li><img src="https://img.icons8.com/material-outlined/10/000000/filled-circle--v1.png"> Warranty: {{i.warranty_period}}</li>
+                                    <li><img src="https://img.icons8.com/material-outlined/10/000000/filled-circle--v1.png"> In Stock: {{i.instock}} items are in stock</li>
+                                </ul>
+								<a href="/product/{{i.product_id}}" class="btn btn-outline-primary">View</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
         {% endfor %}
       </div>
     </div>
