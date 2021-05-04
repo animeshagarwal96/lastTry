@@ -24,98 +24,19 @@ html {
 
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/**
- * Content Wrapper
- */
-
 .o-wrapper {
 	max-width: 1200px;
 	margin-left: auto;
 	margin-right: auto;
-	padding-left: 24px;
-	padding-right: 24px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
-/**
- * Slider Product Trays
- */
-
-.o-slider-image-viewer {
-	position: relative;
-}
-
-.o-slider-image-viewer__inner {
-	display: block;
-	margin: 0;
-	padding: 0;
-}
-
-.o-slider-image-viewer__slide {
-	list-style: none;
-	text-align: center;
-}
-
-.o-slider-image-viewer__nav {
-	align-items: center;
-	display: flex;
-	justify-content: center;
-	margin-top: 12px;
-}
-
-.o-slider-image-viewer__dot {
-	&:focus {
-		outline: 0;
-	}
-	
-	&.tns-nav-active {
-		background-color: #aaa;
-		cursor: default;
-	}
-}
-
-<!-- @media screen and (min-width: 900px) {
-	.o-slider-image-viewer__dot {
-    	align-items: center;
-		background-color: transparent;
-		border-radius: 0;
-		border: 1px solid transparent;
-	    display: flex;
-		height: auto;
-    	justify-content: center;
-		padding: 3px;
-		width: 48px;
-		
-		&.tns-nav-active {
-			background-color: transparent;
-			border-color: #aaa;
-		}
-	}
-} -->
-
-@media screen and (max-width: 899px) {
-	.o-slider-image-viewer__dot{
-		width:25px;
-	}
-}
 @media screen and (max-width: 899px) {
 	.card{
 		margin:10px;
 	}
 }
-/**
- * Product Image Viewer
- */
-
-.c-product-image-viewer__image {
-	max-height: calc(90vh - 96px);
-}
-
-
 
 .c-product-container {
 	display: flex;
@@ -127,10 +48,14 @@ img {
 
 .c-product-container__element {
 	flex-basis: 100%;
-	padding-left: 96px;
+	padding-left: 106px;
 	text-align: center;
 }
-
+@media (max-width:899px){
+  .c-product-container__element{
+    padding-left:20px;
+  }
+}
 .c-product-container__element--details {
   margin-top: 48px;
 }
@@ -508,109 +433,120 @@ img {
 	text-align: center;
 	display: block
   }
+  .zoom {
+    padding: 50px;
+    transition: transform .2s; /* Animation */
+    margin: 0 auto;
+  }
+  
+  .zoom:hover {
+    transform: scale(1.5); /* (150% zoom)*/
+  }
+  
 {% endblock %}
 {% block body %}
-<div class="o-wrapper">
+    <div class="o-wrapper">
 
-	<div class="c-product-container">
+        <div class="container">
+          <div class="row my-5">
+              <!-- Product Gallery      -->
+              <div class="col-md-5">
+                  <aside class="pgallery">
+                      <div class="row">
+                          <!-- Thumbs -->
+                          <div class="col-lg-2">
+                              <div class="thumbnails d-flex flex-row flex-lg-column h-100">
+                                  {% if product.0.image %}
+                                  <div class="pt-wrap mr-2 mr-lg-0 mb-2 tsack border">
+                                      <a href="#" rel="/media/{{product.0.image}}" class="thumbLink thumbnail active"><img width="50" src="/media/{{product.0.image}}" alt="..." class="pthumb img-fluid"></a>
+                                  </div>
+                                  {% endif %}
+                                  {% if product.0.image1 %}
+                                  <div class="pt-wrap mr-2 mr-lg-0 mb-2 tsack border">
+                                      <a href="#" rel="/media/{{product.0.image1}}" class="thumbLink thumbnail active"><img width="50" src="/media/{{product.0.image1}}" alt="..." class="pthumb img-fluid"></a>
+                                  </div>
+                                  {% endif %}
+                                  {% if product.0.image2 %}
+                                  <div class="pt-wrap mr-2 mr-lg-0 mb-2 tsack border">
+                                      <a href="#" rel="/media/{{product.0.image2}}" class="thumbLink active"><img width="50" src="/media/{{product.0.image2}}" alt="..." class="pthumb img-fluid"></a>
+                                  </div>
+                                  {% endif %}
+                                  {% if product.0.image3 %}
+                                  <div class="pt-wrap mr-2 mr-lg-0 mb-2 tsack border">
+                                      <a href="#" rel="/media/{{product.0.image3}}" class="thumbLink active"><img width="50" src="/media/{{product.0.image3}}" alt="..." class="pthumb img-fluid"></a>
+                                  </div>
+                                  {% endif %}
+                                  {% if product.0.image4 %}
+                                  <div class="pt-wrap mr-2 mr-lg-0 mb-2 tsack border">
+                                      <a href="#" rel="/media/{{product.0.image4}}" class="thumbLink active"><img width="50" src="/media/{{product.0.image4}}" alt="..." class="pthumb img-fluid"></a>
+                                  </div>
+                                  {% endif %}
+                              </div>
+                          </div>
+                          <!-- Thumbs -->
 
+                          <!-- Main image -->
+                          <div class="col-lg-10 d-flex flex-column">
+                              <div class="zoom main-pimage flex-grow-1" id="izoomy">
+                                  <img src="/media/{{product.0.image}}" alt="" class="custom img-fluid mx-auto d-block">
+                              </div>
+                              <div class="slidy d-flex py-1">
+                                  <a id="prev" href="#" class="btn btn-outline-secondary" role="button">Prev</a>
+                                  <a id="next" href="#" class="btn btn-outline-secondary ml-auto" role="button">Next</a>
+                              </div>
+                          </div>
+                          <!-- Main image -->
+                      </div>
 
-		<div class="c-product-container__element c-product-container__element--images">
-
-			<div class="c-product-image-viewer">
-
-				<div class="c-product-image-viewer__carousel">
-
-				  <div class="o-slider-image-viewer">        
-
-					<ul class="o-slider-image-viewer__inner js-sliderImageViewer">
-
-						<li class="o-slider-image-viewer__slide">
-						  <img id="expandedImg" class="c-product-image-viewer__image" 
-							   src="/media/{{product.0.image}}">
-						</li>
-
-					</ul><!-- /o-slider-image-viewer__inner -->
-
-					<div class="o-slider-image-viewer__nav js-imageViewerNav">
-						<span class="o-slider-image-viewer__dot">
-							<img class="o-slider-image-viewer__dot-image" onclick="myFunction(this);" src="/media/{{product.0.image}}">
-						</span><!-- /o-slider-image-viewer__dot -->
-            {% if product.0.image1 %}
-						<span class="o-slider-image-viewer__dot">
-							<img class="o-slider-image-viewer__dot-image" onclick="myFunction(this);"  src="/media/{{product.0.image1}}">
-						</span><!-- /o-slider-image-viewer__dot -->
-            {% endif %}
-            {% if product.0.image2 %}
-						<span class="o-slider-image-viewer__dot">
-							<img class="o-slider-image-viewer__dot-image" onclick="myFunction(this);" src="/media/{{product.0.image2}}">
-						</span><!-- /o-slider-image-viewer__dot -->
-            {% endif %}
-            {% if product.0.image3 %}
-						<span class="o-slider-image-viewer__dot">
-              <img class="o-slider-image-viewer__dot-image" onclick="myFunction(this);" src="/media/{{product.0.image3}}">
-						</span><!-- /o-slider-image-viewer__dot -->
-            {% endif %}
-            {% if product.0.image4 %}
-						<span class="o-slider-image-viewer__dot">
-							<img class="o-slider-image-viewer__dot-image" onclick="myFunction(this);" src="/media/{{product.0.image4}}">
-						</span><!-- /o-slider-image-viewer__dot -->
-            {% endif %}
-
-					</div><!-- /o-slider-image-view__nav -->
+                  </aside>
+              </div>
+              <!-- Product Gallery ends -->
+              <div class="c-product-container__element col-md-7 c-product-container__element--details">
+                <div class="product-description">
+                  <span>{{product.0.category}}</span>
+                   <h1>{{product.0.product_name}}</h1>
+                   <p>{{product.0.desc}}</p>
+                 </div>
+                 
+                 <div class="product-price">
+                   <span>₹{{product.0.product_price}}</span>
+                   <a href="\checkout\{{product.0.product_id}}" class="cart-btn">Buy Now</a>
+                 </div>
+                 <div class="verified">
+                    <span>&#10003;</span>
+                    <p class="font"><strong>ManuFactured</strong>: {{product.0.manufacturer_detail}}</p>
+                 </div>
           
-        </div><!-- /o-slider-image-viewer -->
+                 <div class="verified">
+                  <span>&#10003;</span>
+                  <p class="font"><strong>Seller</strong>: {{product.0.seller_name}}</p>
+                </div>
+          
+                <div class="verified">
+                  <span>&#10003;</span>
+                  <p class="font"><strong>Warranty Period</strong>: {{product.0.warranty_period}}</p>
+                </div>
+                {% if product.0.warranty_period%}
+                <div class="verified">
+                  <span>&#10003;</span>
+                  <p class="font">{{product.0.refundable}}</p>
+                </div>
+                {% else %}
+                <div class="verified-cross">
+                  <span>X</span>
+                  <p class="font">Non-Refundable</p>
+                </div>
+                {% endif %}
+                <!-- {% for key,values in product.0.keyfeature.items %} -->
+                <!-- {% endfor %} -->
+              </div><!-- /c-product-container__element -->
+          
+          
+            </div><!-- /c-product-container -->
+          </div>
         
-      </div><!-- /c-image-viewer__carousel -->
-      
-    </div><!-- /c-image-viewer -->
+      </div>
     
-		</div><!-- /c-product-container__element -->
-
-    
-		<div class="c-product-container__element c-product-container__element--details">
-      <div class="product-description">
-        <span>{{product.0.category}}</span>
-         <h1>{{product.0.product_name}}</h1>
-         <p>{{product.0.desc}}</p>
-       </div>
-       
-       <div class="product-price">
-         <span>₹{{product.0.product_price}}</span>
-         <a href="\checkout\{{product.0.product_id}}" class="cart-btn">Buy Now</a>
-       </div>
-       <div class="verified">
-          <span>&#10003;</span>
-          <p class="font"><strong>ManuFactured</strong>: {{product.0.manufacturer_detail}}</p>
-       </div>
-
-       <div class="verified">
-        <span>&#10003;</span>
-        <p class="font"><strong>Seller</strong>: {{product.0.seller_name}}</p>
-      </div>
-
-      <div class="verified">
-        <span>&#10003;</span>
-        <p class="font"><strong>Warranty Period</strong>: {{product.0.warranty_period}}</p>
-      </div>
-      {% if product.0.warranty_period%}
-      <div class="verified">
-        <span>&#10003;</span>
-        <p class="font">{{product.0.refundable}}</p>
-      </div>
-      {% else %}
-      <div class="verified-cross">
-        <span>X</span>
-        <p class="font">Non-Refundable</p>
-      </div>
-      {% endif %}
-      <!-- {% for key,values in product.0.keyfeature.items %} -->
-      <!-- {% endfor %} -->
-		</div><!-- /c-product-container__element -->
-
-
-	</div><!-- /c-product-container -->
-	
 </div><!-- /o-wrapper -->
 <!-- -->
 
@@ -621,7 +557,7 @@ img {
         {% for i in products %}
         <div class="col-xs-4 col-sm-4 col-md-4 tune">
           <div class="card">
-            <div class="view zoom overlay">
+            <div class="view overlay">
               <a href="/product/{{i.product_id}}">
                 <div class="mask">
                   <img class="img-fluid img-wrap w-100"
@@ -693,6 +629,15 @@ img {
     </section>
     {% endfor %}
   </div>
+  <section id="contact">
+    <div class="container">
+      <h4>contact us</h4>
+      <p>justclicknpick1@gmail.com</p>
+      <p class="email">emailus <span><img src="https://res.cloudinary.com/de8cuyd0n/image/upload/v1520412541/E-commerce%20landing%20page/icons/get_in_touch_1x.png" alt="email-image"></span></p>
+    </div>
+  </section>
+  <div class="back-to-top"><a href="#"> <img title="JC&P." width="50" height="50" src="/media/shop/images/logo_2.png" alt="JC&P"></a> </div>
+  
   {% block js %}
     <script>
       $(document).ready(function() {
@@ -712,13 +657,24 @@ img {
       
       //Image Zoomer
     </script>
+    <script>
+      $(".thumbLink").click(function(event) {        
+        var image = $(this).attr("rel");
+        $(".thumbLink").removeClass('active');
+        $( this ).addClass( "active" );
+        $('.main-pimage').hide();
+        $('.main-pimage').fadeIn('slow');
+        $('.main-pimage').html('<img src="' + image + '" class="custom img-fluid mx-auto d-block"/>');
+        return false;
+    });
+
+    $("#next").click(function(event) {        
+        $(".thumbLink.active").parent().next().find(".thumbLink").trigger('click');
+    });
+
+    $("#prev").click(function(event) {        
+        $(".thumbLink.active").parent().prev().find(".thumbLink").trigger('click');
+    });
+    </script>
    {% endblock %}
-   <section id="contact">
-    <div class="container">
-      <h4>contact us</h4>
-      <p>justclicknpick1@gmail.com</p>
-      <p class="email">emailus <span><img src="https://res.cloudinary.com/de8cuyd0n/image/upload/v1520412541/E-commerce%20landing%20page/icons/get_in_touch_1x.png" alt="email-image"></span></p>
-    </div>
-  </section>
-  <div class="back-to-top"><a href="#"> <img title="JC&P." width="50" height="50" src="/media/shop/images/logo_2.png" alt="JC&P"></a> </div>
-{% endblock %}
+  {% endblock %}
