@@ -59,6 +59,7 @@ class Order(models.Model):
     product_id = models.CharField(max_length=100,default="")
     product_name = models.CharField(max_length=100)
     product_price = models.CharField(max_length=100)
+    total_price = models.CharField(max_length=100,default="0")
     product_category = models.CharField(max_length=100)
     category_size = models.CharField(max_length=100,default="no size",blank=True)
     customer_name = models.CharField(max_length=100)
@@ -72,6 +73,8 @@ class Order(models.Model):
     zipCode = models.CharField(max_length=50)
     customer_username = models.CharField(max_length=500)
     status = models.CharField(max_length=100,default="Order Placed")
+    image = models.CharField(max_length=100,default="")
+    quantity = models.CharField(max_length=100,default="1")
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

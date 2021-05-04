@@ -88,12 +88,15 @@ def checkout(request,id):
         product_name = product[0].product_name
         product_price = product[0].product_price
         product_category = product[0].category
+        product_quantity = request.POST.get('quantity1')
+        image = product[0].image
+        total_price = int(product_price) * int(product_quantity)
         if product_category == 'Garments' or product_category=='Pants' or product_category =='Kurti':
             category_size = request.POST.get('size')
         else:
             category_size = ""
         customer_name = request.POST.get('name')
-        customer_email = request.POST.get('email')
+        customer_email = request.POST.get('email1')
         customer_phone = request.POST.get('phone')
         alternative_number = request.POST.get('phone2')
         delivery_address = request.POST.get('address1')
@@ -107,19 +110,19 @@ def checkout(request,id):
         if city.lower() != 'kolkata' or state.lower() != 'west bengal':
             messages.error(request,'We dont deliver this product to your place')
             return redirect(request.path)
-        order = Order(product_id=product_id,product_name=product_name,product_price=product_price,product_category=product_category,category_size=category_size,customer_name=customer_name,customer_email=customer_email,customer_phone=customer_phone,alternative_number=alternative_number,delivery_address=delivery_address,Alternate_address=Alternate_address,city=city,state=state,zipCode=zipCode,customer_username = customer_username)
+        order = Order(product_id=product_id,product_name=product_name,product_price=product_price,product_category=product_category,quantity=product_quantity,image=image,total_price=total_price,category_size=category_size,customer_name=customer_name,customer_email=customer_email,customer_phone=customer_phone,alternative_number=alternative_number,delivery_address=delivery_address,Alternate_address=Alternate_address,city=city,state=state,zipCode=zipCode,customer_username = customer_username)
         order.save()
         try:
             #Mail Owner
             subject = 'Order From JC&P'
-            message = f'Hi Mr Rahul, there is a Order placed by {request.user.first_name} with product {product_name} of Amount Rs {product_price} from JustClickNPick deliver the order as fast as you can to {delivery_address} within 7 working days for in case if the Order gets late contact the Customer or mail them at {customer_email} Payment method is Cash On Delivery'
+            message = f'Hi Mr Rahul, there is a Order placed by {request.user.first_name} with product {product_name}({product_quantity}) of Amount Rs {total_price} from JustClickNPick deliver the order as fast as you can to {delivery_address} within 7 working days for in case if the Order gets late contact the Customer or mail them at {customer_email} Payment method is Cash On Delivery'
             email_from = settings.EMAIL_HOST_USER
             recipient_list = ["rahulagarwal24.ad@gmail.com", ]
             send_mail( subject, message, email_from, recipient_list )
 
             #Mail thing
             subject = 'Thank you for Ordering in JC&P'
-            message = f'Hi {customer_firstName}, thank you for Ordering {product_name} of Amount Rs {product_price} from JustClickNPick your Order will be delivered at {delivery_address} within 7 working days for in case if the Order gets late contact us on www.justclicknpick.in/contact or mail us on {settings.EMAIL_HOST_USER} Payment method is Cash On Delivery'
+            message = f'Hi {customer_firstName}, thank you for Ordering {product_name}({product_quantity}) of Amount Rs {total_price} from JustClickNPick your Order will be delivered at {delivery_address} within 7 working days for in case if the Order gets late contact us on www.justclicknpick.in/contact or mail us on {settings.EMAIL_HOST_USER} Payment method is Cash On Delivery'
             email_from = settings.EMAIL_HOST_USER
             recipient_list = [customer_email, ]
             send_mail( subject, message, email_from, recipient_list )

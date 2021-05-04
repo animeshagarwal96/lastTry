@@ -133,7 +133,16 @@
                         {% endif %}
                       </select>
                       {% endif %}
-                      <p class="card-text"><small class="text-muted">₹{{product.0.product_price}}</small></p>
+                      <p class="card-text">Price: <small class="text-muted">₹{{product.0.product_price}}</small></p>
+                      <input type="hidden" value="{{product.0.product_price}}" id="show_price">
+                      <span>Select Quantity</span>
+                      <select name="quantity1" id="quantity1" onchange="quantity();" class="form-select">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                      </select>
+                      <h6 class="my-2" id="total_Price">Total: ₹{{product.0.product_price}}</h6>
                     </div>
                   </div>
                 </div>
@@ -144,8 +153,8 @@
                 <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
               </div>
             <div class="col-md-12">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" name="email" class="form-control" id="email" placeholder="Your Email" required>
+              <label for="email1" class="form-label">Email</label>
+              <input type="email" name="email1" class="form-control" id="email1" placeholder="Your Email" required>
             </div>
             <div class="col-md-6">
               <label for="phone" class="form-label">Phone</label>
@@ -189,7 +198,7 @@
             <div class="alert alert-danger col-12" role="alert">
                 You must logged in first to proceed checkout !!
               </div>
-            {% endif %}
+            {% endif %} 
           </form>
     </div>
     
@@ -208,6 +217,16 @@
             $('#checkout').submit(function(){
             $(this).find(':input[type=submit]').prop('disabled', true);
             });
+        </script>
+
+        <script>
+          function quantity(){
+            const quantity = document.getElementById('quantity1').value;
+            const price = document.getElementById('show_price').value;
+            var totalPrice = price * quantity;
+            const myPrice = document.getElementById('total_Price')
+            myPrice.innerHTML = `Total: ₹${totalPrice}`
+          }
         </script>
     {% endblock %}
     <section id="contact">
