@@ -14,174 +14,63 @@ html {
   box-sizing: border-box;
 }
 
-* {
-
-  &,
-  &:before,
-  &:after {
-    box-sizing: inherit;
-  }
-
+.carousel-item {
+  width: 100%
 }
 
-.o-wrapper {
-	max-width: 1200px;
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 15px;
-	padding-right: 15px;
+.price span {
+  font-size: 18px
 }
 
-@media screen and (max-width: 899px) {
-	.card{
-		margin:10px;
-	}
+.cut {
+  text-decoration: line-through;
+  color: red
 }
 
-.c-product-container {
-	display: flex;
-	flex-wrap: wrap;
-	margin-left: -96px;
-	margin-top: 96px;
-	margin-bottom: 96px;
+.icons i {
+  font-size: 17px;
+  color: green;
+  margin-right: 2px
 }
 
-.c-product-container__element {
-	flex-basis: 100%;
-	padding-left: 106px;
-	text-align: center;
-}
-@media (max-width:899px){
-  .c-product-container__element{
-    padding-left:20px;
-  }
-}
-.c-product-container__element--details {
-  margin-top: 48px;
+.offers i {
+  color: green
 }
 
-@media screen and (min-width: 900px) {
-  .c-product-container__element {
-		flex-basis: 50%;
-	}
-	
-	.c-product-container__element--images {
-		text-align: right;
-	}
-	
-	.c-product-container__element--details {
-		text-align: left;
-		margin-top: 0;
-	}
+.delivery i {
+  color: blue
 }
 
-.product-description {
-  border-bottom: 1px solid #E1E8EE;
-  margin-bottom: 20px;
+label.radio {
+  cursor: pointer
 }
-.product-description span {
-  font-size: 12px;
-  color: #0e538c;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-decoration: none;
+
+label.radio input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  pointer-events: none
 }
-.product-description h1 {
-  font-weight: 300;
-  font-size: 52px;
-  color: #43484D;
-  letter-spacing: -2px;
-}
-.product-description p {
-  font-size: 16px;
-  font-weight: 300;
-  color: #1f4c72;
-  line-height: 24px;
-}
-.cart-btn {
+
+label.radio span {
+  padding: 2px 11px;
+  margin-right: 3px;
+  border: 1px solid #8f37aa;
   display: inline-block;
-  background-color: #7DC855;
-  border-radius: 6px;
-  font-size: 16px;
-  color: #FFFFFF;
-  text-decoration: none;
-  padding: 12px 30px;
-  transition: all .5s;
-}
-.cart-btn:hover {
-  background-color: #64af3d;
-}
-.product-price {
-  display: flex;
-  align-items: center;
+  color: #8f37aa;
+  border-radius: 3px;
+  text-transform: uppercase
 }
 
-.product-price span {
-  font-size: 26px;
-  font-weight: 300;
-  color: #43474D;
-  margin-right: 20px;
+label.radio input:checked+span {
+  border-color: #8f37aa;
+  background-color: #8f37aa;
+  color: #fff
 }
 
-@media screen and (min-width: 900px) {
-  .c-product-name {
-		margin-bottom: 24px;
-	}
-}
-.font{
-    font-size: 12px;
-    color: #0e538c;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-decoration: none;
-}
-<!--
-  Important
--->
-.bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-  }
+  
 
-  @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-      font-size: 3.5rem;
-    }
-  }
-  .image{
-      width:400px;
-      height:400px;
-  }
-  .verified{
-    display:flex;
-  }
-  .verified span,p{
-    margin:4px;
-  }
-  .verified span{
-    background: #44dcd5;
-    border: 1px solid #4cd5c2;
-    border-radius: 50%;
-    padding: 2px;
-    padding bottom: 0px;
-  }
-
-  .verified-cross{
-    display:flex;
-  }
-  .verified-cross span,p{
-    margin:4px;
-  }
-  .verified-cross span{
-    background: #ec163e;
-    border: 1px solid #a73389;
-    border-radius: 50%;
-    padding: 2px;
-    padding bottom: 0px;
-  }
   .card{
     background-color: #ffffff;
 	  background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%);
@@ -433,122 +322,66 @@ html {
 	text-align: center;
 	display: block
   }
-  .zoom {
-    padding: 50px;
-    transition: transform .2s; /* Animation */
-    margin: 0 auto;
-  }
-  
-  .zoom:hover {
-    transform: scale(1.5); /* (150% zoom)*/
-  }
-  
 {% endblock %}
 {% block body %}
-    <div class="o-wrapper">
-
-        <div class="container">
-          <div class="row my-5">
-              <!-- Product Gallery      -->
-              <div class="col-md-5">
-                  <aside class="pgallery">
-                      <div class="row">
-                          <!-- Thumbs -->
-                          <div class="col-lg-2">
-                              <div class="thumbnails d-flex flex-row flex-lg-column h-100">
-                                  {% if product.0.image %}
-                                  <div class="pt-wrap mr-2 mr-lg-0 mb-2 tsack border">
-                                      <a href="#" rel="/media/{{product.0.image}}" class="thumbLink thumbnail active"><img width="50" src="/media/{{product.0.image}}" alt="..." class="pthumb img-fluid"></a>
-                                  </div>
-                                  {% endif %}
-                                  {% if product.0.image1 %}
-                                  <div class="pt-wrap mr-2 mr-lg-0 mb-2 tsack border">
-                                      <a href="#" rel="/media/{{product.0.image1}}" class="thumbLink thumbnail active"><img width="50" src="/media/{{product.0.image1}}" alt="..." class="pthumb img-fluid"></a>
-                                  </div>
-                                  {% endif %}
-                                  {% if product.0.image2 %}
-                                  <div class="pt-wrap mr-2 mr-lg-0 mb-2 tsack border">
-                                      <a href="#" rel="/media/{{product.0.image2}}" class="thumbLink active"><img width="50" src="/media/{{product.0.image2}}" alt="..." class="pthumb img-fluid"></a>
-                                  </div>
-                                  {% endif %}
-                                  {% if product.0.image3 %}
-                                  <div class="pt-wrap mr-2 mr-lg-0 mb-2 tsack border">
-                                      <a href="#" rel="/media/{{product.0.image3}}" class="thumbLink active"><img width="50" src="/media/{{product.0.image3}}" alt="..." class="pthumb img-fluid"></a>
-                                  </div>
-                                  {% endif %}
-                                  {% if product.0.image4 %}
-                                  <div class="pt-wrap mr-2 mr-lg-0 mb-2 tsack border">
-                                      <a href="#" rel="/media/{{product.0.image4}}" class="thumbLink active"><img width="50" src="/media/{{product.0.image4}}" alt="..." class="pthumb img-fluid"></a>
-                                  </div>
-                                  {% endif %}
-                              </div>
-                          </div>
-                          <!-- Thumbs -->
-
-                          <!-- Main image -->
-                          <div class="col-lg-10 d-flex flex-column">
-                              <div class="zoom main-pimage flex-grow-1" id="izoomy">
-                                  <img src="/media/{{product.0.image}}" alt="" class="custom img-fluid mx-auto d-block img-wrap">
-                              </div>
-                              <div class="slidy d-flex py-1">
-                                  <a id="prev" href="#" class="btn btn-outline-secondary" role="button">Prev</a>
-                                  <a id="next" href="#" class="btn btn-outline-secondary ml-auto" role="button">Next</a>
-                              </div>
-                          </div>
-                          <!-- Main image -->
-                      </div>
-
-                  </aside>
+<div class="container-fluid mt-5">
+  <div class="row">
+      <div class="col-md-5">
+          <div class="carousel slide" data-ride="carousel" id="carousel-1">
+              <div class="carousel-inner" role="listbox">
+                  <div class="carousel-item active"><img class="img-thumbnail w-100 d-block" src="/media/{{product.0.image}}" alt="Slide Image" loading="lazy"></div>
+                  {% if product.0.image1 %}
+                  <div class="carousel-item"><img class="img-thumbnail w-100 d-block" src="/media/{{product.0.image1}}" alt="Slide Image"></div>
+                  {% endif %}
+                  {% if product.0.image2 %}
+                  <div class="carousel-item"><img class="img-thumbnail w-100 d-block" src="/media/{{product.0.image2}}" alt="Slide Image"></div>
+                  {% endif %}
+                  {% if product.0.image3 %}
+                  <div class="carousel-item"><img class="img-thumbnail w-100 d-block" src="/media/{{product.0.image3}}" alt="Slide Image"></div>
+                  {% endif %}
+                  {% if product.0.image4 %}
+                  <div class="carousel-item"><img class="img-thumbnail w-100 d-block" src="/media/{{product.0.image4}}" alt="Slide Image"></div>
+                  {% endif %}
               </div>
-              <!-- Product Gallery ends -->
-              <div class="c-product-container__element col-md-7 c-product-container__element--details">
-                <div class="product-description">
-                  <span>{{product.0.category}}</span>
-                   <h1>{{product.0.product_name}}</h1>
-                   <p>{{product.0.desc}}</p>
-                 </div>
-                 
-                 <div class="product-price">
-                   <span>₹{{product.0.product_price}}</span>
-                   <a href="\checkout\{{product.0.product_id}}" class="cart-btn">Buy Now</a>
-                 </div>
-                 <div class="verified">
-                    <span>&#10003;</span>
-                    <p class="font"><strong>ManuFactured</strong>: {{product.0.manufacturer_detail}}</p>
-                 </div>
-          
-                 <div class="verified">
-                  <span>&#10003;</span>
-                  <p class="font"><strong>Seller</strong>: {{product.0.seller_name}}</p>
-                </div>
-          
-                <div class="verified">
-                  <span>&#10003;</span>
-                  <p class="font"><strong>Warranty Period</strong>: {{product.0.warranty_period}}</p>
-                </div>
-                {% if product.0.warranty_period%}
-                <div class="verified">
-                  <span>&#10003;</span>
-                  <p class="font">{{product.0.refundable}}</p>
-                </div>
-                {% else %}
-                <div class="verified-cross">
-                  <span>X</span>
-                  <p class="font">Non-Refundable</p>
-                </div>
-                {% endif %}
-                <!-- {% for key,values in product.0.keyfeature.items %} -->
-                <!-- {% endfor %} -->
-              </div><!-- /c-product-container__element -->
-          
-          
-            </div><!-- /c-product-container -->
+              <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
+              <ol class="carousel-indicators">
+                  <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
+                  {% if product.0.image1 %}
+                  <li data-target="#carousel-1" data-slide-to="1"></li>
+                  {% endif %}
+                  {% if product.0.image2 %}
+                  <li data-target="#carousel-1" data-slide-to="2"></li>
+                  {% endif %}
+                  {% if product.0.image3 %}
+                  <li data-target="#carousel-1" data-slide-to="3"></li>
+                  {% endif %}
+                  {% if product.0.image4 %}
+                  <li data-target="#carousel-1" data-slide-to="4"></li>
+                  {% endif %}
+                  
+              </ol>
           </div>
-        
       </div>
-    
-</div><!-- /o-wrapper -->
-<!-- -->
+      <div class="col-md-7">
+          <h4>{{product.0.product_name}}</h4>
+          <div class="price"><span class="mr-2"><i class="fa fa-rupee text-success"></i>&nbsp;{{product.0.product_price}}</span>
+            <!-- <span class="mr-2 cut">65,000</span><span class="text-success">25% OFF</span> -->
+          </div>
+          <div class="d-flex flex-row">
+              <div class="icons mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa fa-star"></i><i class="fa fa-star-o"></i></div>
+          </div>
+          <div class="d-flex align-items-center mt-4 offers mb-1"><i class="fa fa-check-square-o mt-1"></i><span class="ml-1 font-weight-bold">Manufactured</span><span class="ml-1 my-2">{{product.0.manufacturer_detail}}<br></span></div>
+          <div class="d-flex align-items-center offers mb-1"><i class="fa fa-check-square-o mt-1"></i><span class="ml-1 font-weight-bold">Warrany Period</span><span class="ml-1 my-2">{{product.0.warranty_period}}<br></span></div>
+          <div class="d-flex align-items-center offers"><i class="fa fa-check-square-o mt-1"></i><span class="ml-1 font-weight-bold">Refund Policy</span><span class="ml-1 my-2">{{product.0.rufundable}}<br></span></div>
+          <div class="d-flex align-items-center offers"><span class="ml-1 font-weight-bold">Description: </span><span class="ml-1 my-2">{{product.0.desc}}<br></span></div>
+          <div class="d-flex align-items-center mt-5 delivery"><i class="fa fa-map-marker"></i><span class="ml-2">Delivery by {{delivery_date}}<br></span><span class="ml-2 mr-2">|<br></span><span class="ml-2 mr-2 text-success">FREE<br></span></div>
+          <hr>
+          <div class="d-flex align-items-center mt-2"></div>
+          <div><span class="font-weight-bold">Seller:</span><span class="ml-2">{{product.0.seller_name}}</span></div>
+          <div class="mt-3"><a href="/checkout/{{product.0.product_id}}" class="btn btn-success">BUY NOW</a></div>
+      </div>
+  </div>
+</div>
 
   <div class="album py-5">
     <div class="container mt-5 mb-5"">

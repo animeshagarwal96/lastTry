@@ -141,11 +141,15 @@ def product(request,id):
     if not product:
         return httpresponse("404 Error")
     comments = ProductComment.objects.filter(product = product[0])
+    from datetime import datetime as DateTime, timedelta as TimeDelta, date
+    date_1 = date.today()
+    end_date = date_1 + TimeDelta(days=7)
+    end_date = end_date.strftime("%A, %B %d, %Y")
     query = product[0].category
     query = query.lower()
     allprods = Product.objects.all()
     products = searchTheProductforShow(query.lower(),allprods)
-    params = {'product':product,'products':products,'comments':comments,'user':request.user}
+    params = {'product':product,'products':products,'comments':comments,'user':request.user,'delivery_date':end_date}
     return render(request,'shop/product.html',params)
 
 def handleSignup(request):
