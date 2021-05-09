@@ -192,7 +192,10 @@
             </div>
             {% if user.is_authenticated %}
             <div class="col-12">
-                <button type="submit" class="btn btn-secondary btn-md">Place Order</button>
+                <!-- <button type="submit" class="btn btn-secondary btn-md">Place Order</button> -->
+                <div class="alert alert-warning col-12" role="alert">
+                  The site is under maintainence, currently we are not accepting any order!!
+                </div>
             </div>
             {% else %}
             <div class="alert alert-danger col-12" role="alert">
